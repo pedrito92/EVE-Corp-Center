@@ -1,0 +1,3 @@
+eve_corp_center_site_homepage:
+    pattern:  /
+    defaults: { _controller: EVECorpCenterSiteBundle:Site:index }

@@ -1,0 +1,4 @@
+eve_corp_center_site:
+    resource: "@EVECorpCenterSiteBundle/Resources/config/routing.yml"
+    prefix:   /
+
