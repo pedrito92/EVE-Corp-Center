@@ -1,0 +1,13 @@
+# Start EVE Corp Center
+<IfModule mod_rewrite.c>
+    #Options +FollowSymlinks -MultiViews
+    #RewriteEngine on
+
+    #RewriteCond %{REQUEST_FILENAME} !-f
+    #RewriteCond %{REQUEST_FILENAME} !-d
+
+    #RewriteRule ^([a-zA-Z0-9_-]+)$ /?domain=$1
+    #RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)$ /?domain=$1&action=$2 [L]
+
+</IfModule>
+# End EVE Corp Center
