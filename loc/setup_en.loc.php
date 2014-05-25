@@ -8,9 +8,9 @@
 
 // SETUP
 
-define("WELCOME_SETUP", "Bienvenue sur l'installateur de EVE Corp Center");
-define("SELECT_LANGUAGE", "Sélectionnez une langue :");
-define("NEXT_STEP", "Next");
+define("WELCOME_SETUP", "Welcome on the EVE Corp Center's installer");
+define("SELECT_LANGUAGE", "Please select your language :");
+define("NEXT_STEP", "Next step");
 
 define("MYSQL_CONNEXION", "Please specify the connection information to your database.");
 define("MYSQL_USER", "User");

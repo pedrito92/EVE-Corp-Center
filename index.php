@@ -15,9 +15,4 @@ function autoloader($classname) {
 }
 spl_autoload_register('autoloader');
 
-
-if(!file_exists("./settings/main.conf.php")) {
-    $setup = new setup();
-} else {
-    $main = new main();
-}
+$main = new main();
