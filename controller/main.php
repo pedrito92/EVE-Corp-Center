@@ -6,20 +6,29 @@
  * Time: 22:56
  */
 
-$domain = '';
-$action = '';
-
-if(isset($_GET['domain'])){
-    $domain = $_GET['domain'];
-}
-if(isset($_GET['action'])){
-    $action = $_GET['action'];
-}
-
 class main {
     function __construct(){
 
+        $domain = '';
+        $action = '';
+
+        if(isset($_GET['domain'])){
+            $domain = $_GET['domain'];
+        }
+        if(isset($_GET['action'])){
+            $action = $_GET['action'];
+        }
+
+        if(!file_exists("./settings/main.conf.php") && $domain != "setup") {
+            header("Location: /?domain=setup");
+        }
+
+
         switch( @$domain ){
+
+            case "setup";
+                new setup();
+                break;
 
             case "forums":
                 $forums = new forums();
