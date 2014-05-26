@@ -98,7 +98,7 @@ class _setup {
                             SHA1('".strtoupper($email).":".$mdp."');"
         );
         $mainConf = fopen("./settings/main.conf.php", "a");
-        fwrite($mainConf, "#### DATABASE INFORMATIONS ####\n");
+        fwrite($mainConf, "<?php /******* DATABASE INFORMATIONS *******/\n");
         fwrite($mainConf, "define('DB_HOST', '".$_SESSION['mysql']['host']."');\n");
         fwrite($mainConf, "define('DB_PORT', '".$_SESSION['mysql']['port']."');\n");
         fwrite($mainConf, "define('DB_USER', '".$_SESSION['mysql']['user']."');\n");
