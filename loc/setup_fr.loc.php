@@ -9,7 +9,7 @@
 // SETUP
 
 define("SETUP_TITLE", "Installation de EVE Corp Center");
-define("WELCOME_SETUP", "Bienvenue sur l'installateur de EVE Corp Center");
+define("WELCOME_SETUP", "Bienvenue sur l'installateur de <em>EVE Corp Center</em>");
 define("SELECT_LANGUAGE", "Sélectionnez une langue :");
 define("NEXT_STEP", "Étape suivante");
 define("PREVIOUS_STEP", "Étape précédente");
