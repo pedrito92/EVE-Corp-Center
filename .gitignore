@@ -1,3 +1,4 @@
 /.idea/
 /var/logs/
+/settings/main.conf.php
 .DS_Store
