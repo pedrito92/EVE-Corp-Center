@@ -13,7 +13,9 @@
     <form action="/?domain=setup&action=createAdmin" method="post">
         <?php echo MYSQL_CONNEXION; ?>
 
-
+        <?php if(isset($erreur) && $erreur != '') {
+            echo "<p>".$erreur."</p>";
+        } ?>
 
         <input type="hidden" name="insertion" value="check">
         <br>

@@ -20,7 +20,7 @@
         <?php if(isset($erreurPDO) && $erreurPDO != 'ok') {
             echo $erreurPDO;
         } else if(isset($erreurPDO) && $erreurPDO == 'ok') {
-            echo "réussi !";
+            echo MYSQL_ERROR_SUCCESS;
         }?>
 
 

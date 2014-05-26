@@ -6,4 +6,11 @@
  * Time: 01:15
  */
 ?>
-<h1>EVE Corp Center</h1>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>EVE Corp Center</title>
+    </head>
+    <body>
+        <h1>EVE Corp Center</h1>

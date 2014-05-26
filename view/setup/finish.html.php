@@ -10,5 +10,5 @@
 <div>
     <h2><?php echo WELCOME_SETUP; ?></h2>
 
-    FINI !!!
+    <p><?php echo FINISH_SETUP; ?></p>
 </div>

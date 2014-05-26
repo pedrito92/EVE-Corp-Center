@@ -86,16 +86,16 @@ class setup {
             $erreur = "";
 
             if($_POST['dbServeur'] == ''){
-                $erreur .= "Veuillez spécifier le serveur<br>";
+                $erreur .= MYSQL_ERROR_HOST."<br>";
             }
             if($_POST['dbPort'] == ''){
-                $erreur .= "Veuillez préciser le port.<br>";
+                $erreur .= MYSQL_ERROR_PORT."<br>";
             }
             if($_POST['dbUtilisateur'] == ''){
-                $erreur .= "Veuillez préciser l'utilisateur.<br>";
+                $erreur .= MYSQL_ERROR_USER."<br>";
             }
             if($_POST['dbNom'] == ''){
-                $erreur .= "Veuillez préciser le nom de la base de données.<br>";
+                $erreur .= MYSQL_ERROR_NAME."<br>";
             }
 
             if($erreur == '') {
@@ -122,6 +122,8 @@ class setup {
     }
 
     function setupDatabase() {
+        $this->language();
+
         $setupDatabase = $this->model->_setupDatabase();
         require_once('view/setup/setupDatabase.html.php');
     }
@@ -135,21 +137,23 @@ class setup {
             $erreur = "";
 
             if($_POST['adminEmail'] == ''){
-                $erreur .= "Veuillez renseigner votre adresse e-mail<br>";
+                $erreur .= ADMIN_ERROR_EMAIL."<br>";
             }
             if($_POST['adminMdp'] == ''){
-                $erreur .= "Veuillez renseigner votre mot de passe.<br>";
+                $erreur .= ADMIN_ERROR_PASS."<br>";
             }
             if($_POST['adminMdp2'] == ''){
-                $erreur .= "Veuillez confirmer votre mot de passe.<br>";
+                $erreur .= ADMIN_ERROR_PASS2."<br>";
             }
             if($_POST['adminMdp'] != $_POST['adminMdp2']){
-                $erreur .= "Les mots de passes saisies sont différents.<br>";
+                $erreur .= ADMIN_ERROR_COMPARE."<br>";
             }
 
             if($erreur == '') {
                 $createAdmin = $this->model->_createAdmin($_POST['adminEmail'], $_POST['adminMdp']);
                 require_once('view/setup/finish.html.php');
+            } else {
+                require_once('view/setup/createAdmin.html.php');
             }
         }
     }
