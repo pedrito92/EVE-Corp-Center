@@ -83,6 +83,9 @@ class _setup {
      * @param $email
      * @param $mdp
      * @return mixed
+     *
+     * Création d'un premier compte administrateur à partir des informations rentrées à la dernière étape,
+     * et création du fichier de configuration.
      */
     function _createAdmin($email, $mdp){
         try {
