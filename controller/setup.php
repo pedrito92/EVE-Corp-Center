@@ -61,7 +61,7 @@ class setup {
      * Permet à l'utilisateur de choisir sa langue et de ce fait la langue par défaut du système
      */
     function intro() {
-        $aLangs = array("en" => "English", "fr" => "Français");
+        $aLangs = array("en" => "English", "es" => "Español", "fr" => "Français");
         require_once('loc/setup_en.loc.php');
         require_once('view/setup/intro.html.php');
     }

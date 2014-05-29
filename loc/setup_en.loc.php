@@ -34,4 +34,4 @@ define("ADMIN_ERROR_PASS", "Please enter a password.");
 define("ADMIN_ERROR_PASS2", "Confirm password.");
 define("ADMIN_ERROR_COMPARE", "Please make sure both password are identical.");
 
-define("FINISH_SETUP", "Installation completed ! Go on <a href=\"#\">/admin</a> to manage ECC !");
+define("FINISH_SETUP", "Installation complete ! Go on <a href=\"#\">/admin</a> to manage ECC !");
