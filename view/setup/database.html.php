@@ -42,9 +42,9 @@
         <input type="text" id="dbNom" name="dbNom" value="<?php echo $form['nomBase']; ?>">
         <br>
 
-        <a href="/?domain=setup"><?php echo PREVIOUS_STEP; ?></a>
+        <a href="<?php echo $_SERVER['PHP_SELF']; ?>?domain=setup"><?php echo PREVIOUS_STEP; ?></a>
         <?php if(isset($erreurPDO) && $erreurPDO == 'ok') { ?>
-            <a href="/?domain=setup&action=setupDatabase"><?php echo NEXT_STEP; ?></a>
+            <a href="<?php echo $_SERVER['PHP_SELF']; ?>?domain=setup&action=setupDatabase"><?php echo NEXT_STEP; ?></a>
         <?php } else { ?>
             <input type="submit" value="<?php echo NEXT_STEP; ?>">
         <?php } ?>
