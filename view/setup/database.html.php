@@ -10,7 +10,7 @@
 <div>
     <h2><?php echo WELCOME_SETUP; ?></h2>
 
-    <form action="/?domain=setup&action=database" method="post">
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>?domain=setup&action=database" method="post">
         <?php echo MYSQL_CONNEXION; ?>
 
         <?php if(isset($erreur) && $erreur != '') {

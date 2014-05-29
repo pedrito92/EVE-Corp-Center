@@ -20,7 +20,7 @@ class main {
         }
 
         if(!file_exists("./settings/main.conf.php") && $domain != "setup") {
-            header("Location: /?domain=setup");
+            header("Location: ".$_SERVER['PHP_SELF']."?domain=setup");
         }
 
 

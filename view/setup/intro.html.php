@@ -10,7 +10,7 @@
 <div>
     <h2><?php echo WELCOME_SETUP; ?></h2>
 
-    <form action="/?domain=setup&action=database" method="post">
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>?domain=setup&action=database" method="post">
         <label for="aLang"><?php echo SELECT_LANGUAGE; ?></label>
         <select id="aLang" name="aLang">
             <?php foreach($aLangs as $key => $lang) {?>
