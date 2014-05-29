@@ -32,6 +32,6 @@ define("MYSQL_INSTALL_SUCCESS", "Installation de la base de données réussie.")
 define("ADMIN_ERROR_EMAIL", "Veuillez saisir votre adresse courriel.");
 define("ADMIN_ERROR_PASS", "Veuillez renseigner un mot de passe.");
 define("ADMIN_ERROR_PASS2", "Veuillez confirmer votre mot de passe.");
-define("ADMIN_ERROR_COMPARE", "Les mots de passe saisies sont différents.");
+define("ADMIN_ERROR_COMPARE", "Les mots de passe saisis sont différents.");
 
 define("FINISH_SETUP", "L'installation est terminée ! Rendez-vous sur <a href=\"#\">/admin</a> pour commencer à administrer ECC !");
