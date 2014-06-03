@@ -19,7 +19,7 @@ class main {
             $action = $_GET['action'];
         }
 
-        if(!file_exists("./settings/main.conf.php") && $domain != "setup") {
+        if(!file_exists("./settings/core.ini.php") && $domain != "setup") {
             header("Location: ".$_SERVER['PHP_SELF']."?domain=setup");
         }
 

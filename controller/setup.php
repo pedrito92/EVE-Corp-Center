@@ -11,7 +11,7 @@ class setup {
     private $model = null;
 
     function __construct() {
-        if(!file_exists("./settings/main.conf.php")) {
+        if(!file_exists("./settings/core.ini.php")) {
 
             session_start();
             $this->model = new _setup();
@@ -67,11 +67,12 @@ class setup {
     }
 
     function database() {
-        $this->language();
 
         if(isset($_POST['aLang']) && $_POST['aLang'] != '') {
             $_SESSION['language'] = $_POST['aLang'];
         }
+
+        $this->language();
 
         $form = array(
             "serveur"       => "localhost",

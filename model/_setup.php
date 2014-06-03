@@ -93,13 +93,20 @@ class _setup {
             $insert = $this->dbh->exec( "INSERT INTO `ecc_users` (`email_user`,`pass_user`)
                                 VALUES ( '".$email."', SHA1('".strtoupper($email).":".$mdp."'));"
             );
-            $mainConf = fopen("./settings/main.conf.php", "a");
-            fwrite($mainConf, "<?php /******* DATABASE INFORMATIONS *******/\n");
-            fwrite($mainConf, "define('DB_HOST', '".$_SESSION['mysql']['host']."');\n");
-            fwrite($mainConf, "define('DB_PORT', '".$_SESSION['mysql']['port']."');\n");
-            fwrite($mainConf, "define('DB_USER', '".$_SESSION['mysql']['user']."');\n");
-            fwrite($mainConf, "define('DB_PASS', '".$_SESSION['mysql']['pass']."');\n");
-            fwrite($mainConf, "define('DB_NAME', '".$_SESSION['mysql']['name']."');\n");
+            $mainConf = fopen("./settings/core.ini.php", "a");
+            fwrite($mainConf, "[DATABASE]\n");
+            fwrite($mainConf, "host     = ".$_SESSION['mysql']['host']."\n");
+            fwrite($mainConf, "port     = ".$_SESSION['mysql']['port']."\n");
+            fwrite($mainConf, "user     = ".$_SESSION['mysql']['user']."\n");
+            fwrite($mainConf, "pass     = ".$_SESSION['mysql']['pass']."\n");
+            fwrite($mainConf, "base     = ".$_SESSION['mysql']['name']."\n");
+            fwrite($mainConf, "\n");
+            fwrite($mainConf, "[STOCKAGE]\n");
+            fwrite($mainConf, "path     = ".dirname(dirname(__FILE__))."\n");
+            fwrite($mainConf, "url      = ".$_SERVER["HTTP_HOST"]."\n");
+            fwrite($mainConf, "\n");
+            fwrite($mainConf, "[INFOS]\n");
+            fwrite($mainConf, "version      = 0.0.1\n");
             fclose($mainConf);
 
         } catch(PDOException $e) {
