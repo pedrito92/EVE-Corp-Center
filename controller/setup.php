@@ -152,6 +152,9 @@ class setup {
 
             if($erreur == '') {
                 $createAdmin = $this->model->_createAdmin($_POST['adminEmail'], $_POST['adminMdp']);
+                unset($_SESSION);
+                session_destroy();
+
                 require_once('view/setup/finish.html.php');
             } else {
                 require_once('view/setup/createAdmin.html.php');
