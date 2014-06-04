@@ -93,7 +93,9 @@ class _setup {
             $insert = $this->dbh->exec( "INSERT INTO `ecc_users` (`email_user`,`pass_user`)
                                 VALUES ( '".$email."', SHA1('".strtoupper($email).":".$mdp."'));"
             );
+
             $mainConf = fopen("./settings/core.ini.php", "a");
+            fwrite($mainConf, "<?php /*\n");
             fwrite($mainConf, "[DATABASE]\n");
             fwrite($mainConf, "host     = ".$_SESSION['mysql']['host']."\n");
             fwrite($mainConf, "port     = ".$_SESSION['mysql']['port']."\n");
