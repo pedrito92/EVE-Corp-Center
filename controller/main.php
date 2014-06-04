@@ -34,6 +34,10 @@ class main {
                 $forums = new forums();
                 break;
 
+            case "user":
+                $user = new user();
+                break;
+
             default:
                 $cms = new cms();
                 break;
