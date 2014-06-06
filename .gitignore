@@ -1,4 +1,5 @@
 /.idea/
 /var/logs/
-/settings/main.conf.php
+/settings/core.ini.php
+/view/.sass-cache/
 .DS_Store
