@@ -156,7 +156,7 @@ class Config
         $this->access = new \Pheal\Access\NullCheck();
         $this->fetcher = new \Pheal\Fetcher\Curl();
 
-        $this->http_user_agent = "( Unknown PHP Application )";
+        $this->http_user_agent = "( CMS EVE Corp Center [http://www.evecorpcenter.com - jad@ellirya.fr] )";
     }
 
     /**
