@@ -8,7 +8,11 @@
 
 class forums {
 
+    private $model = null;
+
     function __construct(){
+
+        $this->model = new _forums();
 
         require_once('view/header.html.php');
         require_once('view/nav.html.php');
@@ -20,10 +24,15 @@ class forums {
                 break;
 
             default:
-                echo "Listing des catégories et forums";
+                $slug = '';
+                $this->listing($slug);
                 break;
         }
 
         require_once('view/footer.html.php');
+    }
+
+    function listing($slug){
+        $listeForums = $this->model->listeForums($slug);
     }
 } 
