@@ -8,10 +8,12 @@
 
 function autoloader($classname) {
 
-    require_once('libs/Pheal/Pheal.php');
+
 
     if( substr( $classname , 0 , 1 ) == "_" ){
         require_once( 'model/'.$classname.".php" );
+    } elseif($classname == "Pheal"){
+        require_once('libs/Pheal/Pheal.php');
     } else {
         require_once( 'controller/'.$classname.".php" );
     }
