@@ -7,6 +7,9 @@
  */
 
 function autoloader($classname) {
+
+    require_once('libs/Pheal/Pheal.php');
+
     if( substr( $classname , 0 , 1 ) == "_" ){
         require_once( 'model/'.$classname.".php" );
     } else {
