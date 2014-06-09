@@ -6,18 +6,22 @@
  * Time: 22:46
  */
 
-function autoloader($classname) {
+function autoloader($class) {
+
+    $path = str_replace('\\', DIRECTORY_SEPARATOR, $class);
 
 
-
-    if( substr( $classname , 0 , 1 ) == "_" ){
-        require_once( 'model/'.$classname.".php" );
-    } elseif($classname == "Pheal"){
-        require_once('libs/Pheal/Pheal.php');
+    if(file_exists('controller/'.$path.'.php')) {
+        $path = 'controller/'.$path;
+    } elseif(file_exists('model/'.$path.'.php')) {
+        $path = 'model/'.$path;
     } else {
-        require_once( 'controller/'.$classname.".php" );
+        $path = 'libs/'.$path;
     }
+
+    require_once($path . '.php');
 }
+
 spl_autoload_register('autoloader');
 
 $main = new main();
