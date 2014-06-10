@@ -94,6 +94,9 @@ class _setup {
                                 VALUES ( '".$email."', SHA1('".strtoupper($email).":".$mdp."'));"
             );
 
+            mkdir('./settings/', 0755);
+            mkdir('./var/cache/pheal/', 0755, true);
+            mkdir('./var/logs/', 0755, true);
             $mainConf = fopen("./settings/core.ini.php", "a");
             fwrite($mainConf, "<?php /*\n");
             fwrite($mainConf, "[DATABASE]\n");
