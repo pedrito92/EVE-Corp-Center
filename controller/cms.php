@@ -39,7 +39,7 @@ class cms {
         $vCode = "BLHfaEJ6oFt07utSvBfNZG6EpPMHW7VTu3s9CqPZ8JxV9UKR5d0mEnzths7Vhbwp";
         $characterID = 90719345;
 
-        Config::getInstance()->cache = new \Pheal\Cache\FileStorage('var/phealcache/');
+        Config::getInstance()->cache = new \Pheal\Cache\FileStorage('var/cache/pheal/');
         Config::getInstance()->access = new \Pheal\Access\StaticCheck();
 
         $pheal2 = new Pheal($keyID, $vCode, "char");
