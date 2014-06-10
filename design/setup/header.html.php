@@ -11,7 +11,7 @@
     <head>
         <meta charset="UTF-8">
         <title>EVE Corp Center</title>
-        <link rel="stylesheet" href="view/stylesheets/setup.css">
+        <link rel="stylesheet" href="design/setup/stylesheets/setup.css">
     </head>
     <body>
         <header>
