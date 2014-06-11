@@ -7,7 +7,7 @@
  */
 
 /**
- * TODO: Documentater les méthodes
+ * TODO: Documentater les méthodes (#5)
  */
 
 namespace kernel\controller;

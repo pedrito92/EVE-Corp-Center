@@ -7,7 +7,8 @@
  */
 
 /**
- * TODO: Cleaner les méthodes et le naming, améliorer la documentation.
+ * TODO: Cleaner les méthodes et le naming (#7)
+ * TODO: améliorer la documentation. (#6)
  */
 
 namespace kernel\Model;
