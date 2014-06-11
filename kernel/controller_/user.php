@@ -6,7 +6,7 @@
  * Time: 23:55
  */
 
-namespace kernel\Controller;
+namespace kernel\controller;
 
 
 class user {
