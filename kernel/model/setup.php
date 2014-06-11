@@ -6,7 +6,13 @@
  * Time: 19:16
  */
 
+/**
+ * TODO: Cleaner les méthodes et le naming, améliorer la documentation.
+ */
+
 namespace kernel\Model;
+use \PDO as PDO;
+use \PDOException as PDOException;
 
 class setup {
 
@@ -17,13 +23,14 @@ class setup {
     }
 
     /**
-     * @param $dsn
-     * @param $user
-     * @param $password
-     *
      * Test les paramètres précisés pour vérifier si la base de données est prête à
      * recevoir les tables.
      *
+     * @param $host
+     * @param $port
+     * @param $dbname
+     * @param $user
+     * @param $password
      * @return string
      */
     function _checkDatabase($host, $port, $dbname, $user, $password){
@@ -96,24 +103,28 @@ class setup {
                                 VALUES ( '".$email."', SHA1('".strtoupper($email).":".$mdp."'));"
             );
 
-            mkdir('./settings/', 0755);
-            mkdir('./var/cache/pheal/', 0755, true);
-            mkdir('./var/logs/', 0755, true);
-            $mainConf = fopen("./settings/core.ini.php", "a");
-            fwrite($mainConf, "<?php /*\n");
-            fwrite($mainConf, "[DATABASE]\n");
-            fwrite($mainConf, "host     = ".$_SESSION['mysql']['host']."\n");
-            fwrite($mainConf, "port     = ".$_SESSION['mysql']['port']."\n");
-            fwrite($mainConf, "user     = ".$_SESSION['mysql']['user']."\n");
-            fwrite($mainConf, "pass     = ".$_SESSION['mysql']['pass']."\n");
-            fwrite($mainConf, "base     = ".$_SESSION['mysql']['name']."\n");
-            fwrite($mainConf, "\n");
-            fwrite($mainConf, "[STOCKAGE]\n");
-            fwrite($mainConf, "path     = ".dirname(dirname(__FILE__))."\n");
-            fwrite($mainConf, "url      = ".$_SERVER["HTTP_HOST"]."\n");
-            fwrite($mainConf, "\n");
-            fwrite($mainConf, "[INFOS]\n");
-            fwrite($mainConf, "version      = 0.0.1\n");
+            mkdir('settings/', 0755);
+            mkdir('var/cache/pheal/', 0755, true);
+            mkdir('var/logs/', 0755, true);
+
+            $conf = "<?php /*
+[DATABASE]
+host     = ".$_SESSION['mysql']['host']."
+port     = ".$_SESSION['mysql']['port']."
+user     = ".$_SESSION['mysql']['user']."
+pass     = ".$_SESSION['mysql']['pass']."
+base     = ".$_SESSION['mysql']['name']."
+
+[STOCKAGE]
+path     = ".dirname(dirname(dirname(__FILE__)))."
+url      = ".$_SERVER["HTTP_HOST"]."
+
+[INFOS]
+version  = 0.0.2
+";
+
+            $mainConf = fopen("settings/core.ini.php", "a");
+            fwrite($mainConf, $conf);
             fclose($mainConf);
 
         } catch(PDOException $e) {

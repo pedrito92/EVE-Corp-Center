@@ -6,8 +6,12 @@
  * Time: 23:55
  */
 
+/**
+ * TODO: Documentater les méthodes
+ */
+
 namespace kernel\controller;
-use kernel\model\setup as Model;
+use kernel\model\setup as model;
 
 class setup {
 
@@ -17,6 +21,9 @@ class setup {
         if(file_exists("settings/core.ini.php")){
             header('Location: /');
         }
+
+        $this->model = new model();
+
         if($_GET['action']!='database'){
             $this->language();
         }
@@ -44,9 +51,6 @@ class setup {
         require_once('design/setup/intro.html.php');
     }
 
-    /**
-     * TODO: Mise à niveau de la méthode pour fonctionner avec la nouvelle structure
-     */
     function database() {
 
         if(isset($_POST['aLang']) && $_POST['aLang'] != '') {
@@ -103,9 +107,40 @@ class setup {
         require_once('design/setup/database.html.php');
     }
 
-    /**
-     * TODO: Finaliser l'installation
-     */
+    function setupDatabase() {
+        $setupDatabase = $this->model->_setupDatabase();
+        require_once('design/setup/setupDatabase.html.php');
+    }
+
+    function createAdmin(){
+        if(!isset($_POST['insertion'])){
+            require_once('design/setup/createAdmin.html.php');
+        } else {
+            $erreur = "";
+
+            if($_POST['adminEmail'] == ''){
+                $erreur .= ADMIN_ERROR_EMAIL."<br>";
+            }
+            if($_POST['adminMdp'] == ''){
+                $erreur .= ADMIN_ERROR_PASS."<br>";
+            }
+            if($_POST['adminMdp2'] == ''){
+                $erreur .= ADMIN_ERROR_PASS2."<br>";
+            }
+            if($_POST['adminMdp'] != $_POST['adminMdp2']){
+                $erreur .= ADMIN_ERROR_COMPARE."<br>";
+            }
+
+            if($erreur == '') {
+                $createAdmin = $this->model->_createAdmin($_POST['adminEmail'], $_POST['adminMdp']);
+                unset($_SESSION);
+
+                require_once('design/setup/finish.html.php');
+            } else {
+                require_once('design/setup/createAdmin.html.php');
+            }
+        }
+    }
 
     function __destruct(){
         require_once('design/setup/footer.html.php');

@@ -1,6 +1,6 @@
-/settings/
-/var/logs/
-/var/cache/
-.idea/
-.sass-cache/
+/settings/*
+/var/logs/*
+/var/cache/*
+.idea/*
+.sass-cache/*
 .DS_Store
