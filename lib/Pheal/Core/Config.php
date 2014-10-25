@@ -158,7 +158,7 @@ class Config
      */
     private function __construct()
     {
-        $this->cache = new \Pheal\Cache\NullStorage();
+        $this->cache = new \Pheal\Cache\FileStorage();
         $this->archive = new \Pheal\Archive\NullStorage();
         $this->log = new \Pheal\Log\NullStorage();
         $this->access = new \Pheal\Access\NullCheck();
