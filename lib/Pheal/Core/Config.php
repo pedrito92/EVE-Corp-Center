@@ -165,7 +165,7 @@ class Config
         $this->fetcher = new \Pheal\Fetcher\Curl();
         $this->rateLimiter = new \Pheal\RateLimiter\NullRateLimiter();
 
-        $this->http_user_agent = "( Unknown PHP Application )";
+        $this->http_user_agent = "( CMS EVE Corp Center [http://www.evecorpcenter.com - jad@ellirya.fr] )";
     }
 
     /**
