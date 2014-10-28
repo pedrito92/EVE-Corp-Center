@@ -42,7 +42,7 @@ class RoutingHandler {
 	/**
 	 * Initialise l'objet
 	 */
-    public function __construct(){
+    private function __construct(){
 		$this->server = $_SERVER;
     }
 
