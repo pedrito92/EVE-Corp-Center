@@ -23,4 +23,7 @@ if ( !ini_get( "date.timezone" ) )
 require_once('autoload.php');
 session_start();
 
-$app = new kernel\RoutingHandler();
+kernel\RoutingHandler::init();
+
+$uri = kernel\RoutingHandler::instance();
+$uri->dispatcher();

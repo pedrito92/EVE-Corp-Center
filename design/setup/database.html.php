@@ -10,7 +10,7 @@
 <div>
     <h2><?php echo WELCOME_SETUP; ?></h2>
 
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>?domain=setup&action=database" method="post">
+    <form action="/setup/database" method="post">
         <?php echo MYSQL_CONNEXION; ?>
 
         <?php if(isset($erreur) && $erreur != '') {
@@ -42,9 +42,9 @@
         <input type="text" id="dbNom" name="dbNom" value="<?php echo $form['nomBase']; ?>">
         <br>
 
-        <a href="<?php echo $_SERVER['PHP_SELF']; ?>?domain=setup"><?php echo PREVIOUS_STEP; ?></a>
+        <a href="/setup"><?php echo PREVIOUS_STEP; ?></a>
         <?php if(isset($erreurPDO) && $erreurPDO == 'ok') { ?>
-            <a href="<?php echo $_SERVER['PHP_SELF']; ?>?domain=setup&action=setupDatabase"><?php echo NEXT_STEP; ?></a>
+            <a href="/setup/setupDatabase"><?php echo NEXT_STEP; ?></a>
         <?php } else { ?>
             <input type="submit" value="<?php echo NEXT_STEP; ?>">
         <?php } ?>

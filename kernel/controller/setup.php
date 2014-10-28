@@ -12,6 +12,7 @@
 
 namespace kernel\controller;
 use kernel\model\setup as model;
+use kernel\RoutingHandler as RoutingHandler;
 
 class setup {
 
@@ -24,7 +25,7 @@ class setup {
 
         $this->model = new model();
 
-        if($_GET['action']!='database'){
+        if(RoutingHandler::instance()->parsedURI[1]!='database'){
             $this->language();
         }
         require_once('design/setup/header.html.php');
