@@ -58,7 +58,7 @@ class RoutingHandler {
 	}
 
 	/**
-	 * Invoque les controllers et leurs méthodes adéquates à l'URI
+	 * Invoque le controller relatif à l'URI
 	 */
     public function dispatcher(){
 		$this->parseURI();
@@ -67,25 +67,28 @@ class RoutingHandler {
             header('Location: /setup/home');
         }
 
-        if(empty($this->parsedURI)){
-            $this->parsedURI[0] = 'site';
-			$this->parsedURI[1] = 'home';
-        }
+		if(isset($this->parsedURI[0])){
+			switch($this->parsedURI[0]){
+				case 'admin':
+					$domain = 'admin';
+					break;
+				case 'forums':
+					$domain = 'forums';
+					break;
+				case 'killboard':
+					$domain = 'killboard';
+					break;
+				default:
+					$domain = 'site';
+			}
+		} else {
+			$domain = 'site';
+		}
 
+		$domain = "kernel\controller\\".$domain;
 
-        if(!isset($domain)){
-            $domain = $this->parsedURI[0];
-        }
-        if(!isset($action)){
-            $action = $this->parsedURI[1];
-        }
-
-        if(!empty($domain) && !empty($action)){
-            $domain = "kernel\controller\\".$domain;
-
-            $controller = new $domain;
-            $controller->$action();
-        }
+		$controller = new $domain;
+		$controller->checkAlias($this->parsedURI);
     }
 
 	/**
