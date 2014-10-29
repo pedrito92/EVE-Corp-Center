@@ -12,7 +12,7 @@ use Pheal\Pheal;
 use Pheal\Core\Config;
 
 
-class site {
+class ECCContentManagementSystem extends ECCObject {
 
     function __construct(){
 

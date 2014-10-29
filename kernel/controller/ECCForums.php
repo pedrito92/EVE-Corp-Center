@@ -9,6 +9,6 @@
 namespace kernel\controller;
 
 
-class forums {
+class ECCForums extends ECCObject {
 
 } 

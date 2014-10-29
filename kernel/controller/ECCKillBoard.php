@@ -2,13 +2,13 @@
 /**
  * Created by PhpStorm.
  * User: florianneveu
- * Date: 10/06/2014
- * Time: 23:55
+ * Date: 29/10/14
+ * Time: 23:58
  */
 
 namespace kernel\controller;
 
 
-class user {
+class ECCKillBoard extends ECCObject {
 
 } 

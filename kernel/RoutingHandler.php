@@ -70,19 +70,19 @@ class RoutingHandler {
 		if(isset($this->parsedURI[0])){
 			switch($this->parsedURI[0]){
 				case 'admin':
-					$domain = 'admin';
+
 					break;
 				case 'forums':
-					$domain = 'forums';
+					$domain = 'ECCForums';
 					break;
 				case 'killboard':
-					$domain = 'killboard';
+					$domain = 'ECCKillBoard';
 					break;
 				default:
-					$domain = 'site';
+					$domain = 'ECCContentManagementSystem';
 			}
 		} else {
-			$domain = 'site';
+			$domain = 'ECCContentManagementSystem';
 		}
 
 		$domain = "kernel\controller\\".$domain;
