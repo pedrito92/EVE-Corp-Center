@@ -78,6 +78,9 @@ class RoutingHandler {
 				case 'killboard':
 					$domain = 'ECCKillBoard';
 					break;
+				case 'setup':
+					$domain = 'setup';
+					break;
 				default:
 					$domain = 'ECCContentManagementSystem';
 			}
@@ -88,7 +91,13 @@ class RoutingHandler {
 		$domain = "kernel\controller\\".$domain;
 
 		$controller = new $domain;
-		$controller->checkAlias($this->parsedURI);
+
+		if(strstr($domain, 'setup') == 'setup') {
+			$method = $this->parsedURI[1];
+			$controller->$method();
+		} else {
+			$controller->checkAlias($this->parsedURI);
+		}
     }
 
 	/**
