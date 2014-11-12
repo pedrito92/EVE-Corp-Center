@@ -81,7 +81,7 @@ class setup {
                             `pseudo_user` varchar(255) NOT NULL,
                             PRIMARY KEY (`ID_user`),
                             UNIQUE KEY `email_user` (`email_user`,`pseudo_user`)
-                        ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;"
+                        ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;"
             );
 
         } catch(PDOException $e) {
