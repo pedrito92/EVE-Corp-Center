@@ -5,6 +5,8 @@
 
 namespace kernel\controller;
 
+//TODO : Récupération des infos dans le fichier settings/core.ini.php à l'aide de la classe ECCINI
+
 const DB_HOST = 'localhost';
 const DB_USER = 'root';
 const DB_PASS = 'root';
