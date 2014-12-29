@@ -9,6 +9,9 @@
 namespace kernel;
 
 
+use kernel\controller\ECCAlias;
+use kernel\controller\ECCObject;
+
 class RoutingHandler {
 
 	/**
@@ -88,15 +91,26 @@ class RoutingHandler {
 			$domain = 'ECCContentManagementSystem';
 		}
 
-		$domain = "kernel\controller\\".$domain;
+		//$domain = "kernel\controller\\".$domain;
 
-		$controller = new $domain;
+		//$controller = new $domain;
+
+		$ECCObjectId = ECCAlias::getECCObjectId($this->requestURI);
+		$object = ECCObject::fetch($ECCObjectId);
+
+		echo '<pre>';
+		var_dump($object);
+
+		exit;
+
+
+		$controller = new \kernel\controller\ECCObject();
 
 		if(strstr($domain, 'setup') == 'setup') {
 			$method = $this->parsedURI[1];
 			$controller->$method();
 		} else {
-			$controller->checkAlias($this->parsedURI);
+			$controller->checkAlias($this->requestURI, $this->parsedURI);
 		}
     }
 
