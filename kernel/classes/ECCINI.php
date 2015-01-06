@@ -6,7 +6,7 @@
  * Time: 23:51
  */
 
-namespace kernel\controller;
+namespace kernel\classes;
 
 
 class ECCINI {

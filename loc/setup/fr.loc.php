@@ -20,6 +20,7 @@ define("MYSQL_PASS", "Mot de passe");
 define("MYSQL_HOST", "Serveur");
 define("MYSQL_PORT", "Port");
 define("MYSQL_DBNAME", "Base de données");
+define("MYSQL_PREFIX", "Préfixe");
 
 define("MYSQL_ERROR_HOST", "Veuillez spécifier le serveur.");
 define("MYSQL_ERROR_PORT", "Veuillez préciser le port.");
@@ -30,6 +31,7 @@ define("MYSQL_ERROR_SUCCESS", "Connexion à la base de données réussie.");
 define("MYSQL_INSTALL_SUCCESS", "Installation de la base de données réussie.");
 
 define("ADMIN_ERROR_EMAIL", "Veuillez saisir votre adresse courriel.");
+define("ADMIN_ERROR_VALIDATION_EMAIL", "Veuillez renseigner une adresse courriel valide.");
 define("ADMIN_ERROR_PASS", "Veuillez renseigner un mot de passe.");
 define("ADMIN_ERROR_PASS2", "Veuillez confirmer votre mot de passe.");
 define("ADMIN_ERROR_COMPARE", "Les mots de passe saisis sont différents.");

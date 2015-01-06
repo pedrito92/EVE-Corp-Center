@@ -6,7 +6,7 @@
  * Time: 22:37
  */
 
-namespace kernel\controller;
+namespace kernel\classes\cms;
 
 use Pheal\Pheal;
 use Pheal\Core\Config;

@@ -1,6 +1,6 @@
 <?php
 
-namespace kernel\controller;
+namespace kernel\classes;
 
 class ECCAlias {
 

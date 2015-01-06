@@ -6,7 +6,7 @@
  * Time: 23:53
  */
 
-namespace kernel\controller;
+namespace kernel\classes;
 
 class ECCObject {
 
@@ -89,7 +89,8 @@ class ECCObject {
 		$row = $db->single();
 
 		if(!$row){
-			header("HTTP/1.1 404 Not found");
+			header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
+			var_dump($_POST);
 			print("<b>Error : not found</b>. The element is not accessible");
 			exit;
 		} else {

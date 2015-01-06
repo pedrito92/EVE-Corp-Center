@@ -20,6 +20,7 @@ define("MYSQL_PASS", "Clave");
 define("MYSQL_HOST", "Servidor");
 define("MYSQL_PORT", "Puerto");
 define("MYSQL_DBNAME", "Base de datos");
+define("MYSQL_PREFIX", "");
 
 define("MYSQL_ERROR_HOST", "Especifique el servidor por favor.");
 define("MYSQL_ERROR_PORT", "Especifique el puerto por favor.");
@@ -30,6 +31,7 @@ define("MYSQL_ERROR_SUCCESS", "¡Muy logrado!");
 define("MYSQL_INSTALL_SUCCESS", "¡Muy logrado!");
 
 define("ADMIN_ERROR_EMAIL", "Introduzca email");
+define("ADMIN_ERROR_VALIDATION_EMAIL", "");
 define("ADMIN_ERROR_PASS", "Introduzca una clave");
 define("ADMIN_ERROR_PASS2", "Confirme la clave por favor.");
 define("ADMIN_ERROR_COMPARE", "Las claves son diferentes.");

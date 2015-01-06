@@ -6,7 +6,7 @@
  * Time: 23:58
  */
 
-namespace kernel\controller;
+namespace kernel\classes\killboard;
 
 
 class ECCKillBoard extends ECCObject {
