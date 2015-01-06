@@ -10,7 +10,7 @@ if (version_compare(PHP_VERSION, '5.2') < 0){
 if(!ini_get("date.timezone")) {
     date_default_timezone_set("UTC");
 }
-ini_set( "display_errors", 0);
+//ini_set( "display_errors", 0);
 
 require_once('autoload.php');
 session_start();
@@ -18,4 +18,4 @@ session_start();
 kernel\RoutingHandler::init();
 
 $uri = kernel\RoutingHandler::instance();
-$uri->dispatcher();
+$uri->routing();

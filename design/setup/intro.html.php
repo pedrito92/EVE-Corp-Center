@@ -11,11 +11,13 @@
     <h2><?php echo WELCOME_SETUP; ?></h2>
 
 
-    <form action="/setup/database" method="post">
-        <label for="aLang"><?php echo SELECT_LANGUAGE; ?></label>
-        <select id="aLang" name="aLang">
-            <?php foreach($aLangs as $key => $lang) {?>
-                <option value="<?php echo $key; ?>"><?php echo $lang; ?></option>
+    <form action="/setup" method="post">
+		<input type="hidden" name="ECCSetup_step" value="database">
+
+		<label for="ECCSetup_language"><?php echo SELECT_LANGUAGE; ?></label>
+		<select id="ECCSetup_language" name="ECCSetup_language">
+            <?php foreach($hLanguage as $key => $rLanguage) {?>
+                <option value="<?php echo $key; ?>"><?php echo $rLanguage; ?></option>
             <?php } ?>
         </select>
 

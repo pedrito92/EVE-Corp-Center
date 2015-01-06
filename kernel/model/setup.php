@@ -106,6 +106,7 @@ class setup {
 
             mkdir('settings/', 0755);
             mkdir('var/cache/pheal/', 0755, true);
+            mkdir('var/cache/twig/', 0755, true);
             mkdir('var/logs/', 0755, true);
             mkdir('var/storage/', 0755, true);
 
