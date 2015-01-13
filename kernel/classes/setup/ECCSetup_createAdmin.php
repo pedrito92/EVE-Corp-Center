@@ -117,7 +117,7 @@ base = ".$_SESSION['mysql']['dbname']."
 prefix = ".$_SESSION['mysql']['prefix']."
 
 [STOCKAGE]
-path = ".dirname(dirname(dirname(__FILE__)))."
+path = ".dirname(dirname(dirname(dirname(__FILE__))))."
 url = ".$_SERVER["HTTP_HOST"]."
 
 [INFOS]
