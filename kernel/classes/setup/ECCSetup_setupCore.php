@@ -153,7 +153,7 @@ class ECCSetup_setupCore extends ECCSetup {
 			mkdir('var/cache/twig/', 0755, true);
 		}
 		if(!file_exists('var/logs')){
-			mkdir('var/logs/', 0755, true);
+			mkdir('var/log/', 0755, true);
 		}
 		if(!file_exists('var/storage')){
 			mkdir('var/storage/', 0755, true);
