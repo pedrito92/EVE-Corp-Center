@@ -113,7 +113,7 @@ host = ".$_SESSION['mysql']['host']."
 port = ".$_SESSION['mysql']['port']."
 username = ".$_SESSION['mysql']['username']."
 passwd = ".$_SESSION['mysql']['passwd']."
-base = ".$_SESSION['mysql']['dbname']."
+dbname = ".$_SESSION['mysql']['dbname']."
 prefix = ".$_SESSION['mysql']['prefix']."
 
 [STOCKAGE]
