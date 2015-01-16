@@ -1,33 +1,34 @@
 <?php
-/**
- * CUSTOM CLASS
- */
 
 namespace kernel\classes;
 
 use \PDO;
+use \PDOException;
 
-//TODO : Récupération des infos dans le fichier settings/core.ini.php à l'aide de la classe ECCINI
-
-const DB_HOST = 'localhost';
-const DB_USER = 'root';
-const DB_PASS = 'root';
-const DB_NAME = 'ecc_demo';
 
 class ECCDB {
 
 	protected static $instance;
 
-	private $host      = DB_HOST;
-	private $user      = DB_USER;
-	private $pass      = DB_PASS;
-	private $dbname    = DB_NAME;
+	private $host;
+	private $port;
+	private $dbname;
+	private $username;
+	private $passwd;
+
 	private $dbh;
 	private $error;
 	private $stmt;
 
 	protected function __construct(){
-		$dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;
+		$ini = ECCINI::instance();
+		$this->host 	= $ini->getVariable('database', 'host');
+		$this->port		= $ini->getVariable('database', 'port');
+		$this->dbname	= $ini->getVariable('database', 'dbname');
+		$this->username	= $ini->getVariable('database', 'username');
+		$this->passwd	= $ini->getVariable('database', 'passwd');
+
+		$dsn = 'mysql:host='.$this->host.';port='.$this->port.';dbname='.$this->dbname;
 
 		$options = array(
 			PDO::ATTR_PERSISTENT    		=> true,
@@ -35,7 +36,7 @@ class ECCDB {
 			PDO::MYSQL_ATTR_INIT_COMMAND	=> "SET NAMES utf8"
 		);
 		try{
-			$this->dbh = new PDO($dsn, $this->user, $this->pass, $options);
+			$this->dbh = new PDO($dsn, $this->username, $this->passwd, $options);
 		}
 		catch(PDOException $e){
 			$this->error = $e->getMessage();
