@@ -16,6 +16,7 @@ class ECCSystem {
 	public $OS;
 	public $OSType;
 	public $fileSystemType;
+	public $fileSeparator;
 	public $lineSeparator;
 
 	static public $instance;
@@ -49,6 +50,7 @@ class ECCSystem {
 			$this->fileSystemType = "unix";
 			$this->lineSeparator = "\n";
 		}
+		$this->fileSeparator = $this->params['DIRECTORY_SEPARATOR'];
 	}
 
 	/**
@@ -73,6 +75,10 @@ class ECCSystem {
 	 */
 	public static function getFileSystemType(){
 		return self::instance()->fileSystemType;
+	}
+
+	public static function getFileSeparator(){
+		return self::instance()->fileSeparator;
 	}
 
 	/**
