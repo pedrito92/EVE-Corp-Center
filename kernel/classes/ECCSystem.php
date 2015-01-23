@@ -28,7 +28,8 @@ class ECCSystem {
 		$this->params = array(
 			'PHP_OS' => PHP_OS,
 			'DIRECTORY_SEPARATOR' => DIRECTORY_SEPARATOR,
-			'PATH_SEPARATOR' => PATH_SEPARATOR
+			'PATH_SEPARATOR' => PATH_SEPARATOR,
+			'_SERVER' => $_SERVER
 		);
 
 		if ( $this->params['PHP_OS'] === 'WINNT' ){
@@ -67,6 +68,14 @@ class ECCSystem {
 	 */
 	public static function getOSType(){
 		return self::instance()->OSType;
+	}
+
+	/**
+	 * Returns the client IP
+	 * @return string
+	 */
+	public static function getClientIP(){
+		return self::instance()->params['_SERVER']['REMOTE_ADDR'];
 	}
 
 	/**
