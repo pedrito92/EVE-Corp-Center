@@ -2,9 +2,6 @@
 
 namespace kernel\classes;
 
-use \LogicException;
-use \InvalidArgumentException;
-
 class ECCINI {
 
 	private $fileName;
@@ -37,7 +34,7 @@ class ECCINI {
 
 		$contents = parse_ini_file($this->getFile(true).'.php', true);
 		if($contents === false){
-			// ERROR
+			ECCDebug::instance()->write('error.log', '', 'Can not read the settings file "'.$this->getFile(true).'".');
 			return false;
 		}
 
@@ -74,9 +71,8 @@ class ECCINI {
 					return true;
 				}
 			}
-			// ERROR
+			ECCDebug::instance()->write('error.log', '', '"'.$sectionVariable.'" was not found in "'.$this->fileName.'" settings file.');
 		}
-		// ERROR?
 		return false;
 	}
 
@@ -84,7 +80,7 @@ class ECCINI {
 		if($this->hasSection($sectionName)){
 			return $this->sectionsValues[strtoupper($sectionName)];
 		}
-		// ERROR
+		ECCDebug::instance()->write('error.log', '', '"'.$sectionName.'" was not found in "'.$this->fileName.'" settings file.');
 		return false;
 	}
 
@@ -92,7 +88,6 @@ class ECCINI {
 		if($this->hasVariable($sectionName, $variableName)){
 			return $this->sectionsValues[strtoupper($sectionName)][$variableName];
 		}
-		// ERROR
 		return false;
 	}
 
@@ -117,36 +112,4 @@ class ECCINI {
 		}
 		return false;
 	}
-
-	/*function parse($file){
-		if ($file !== null) {
-			$this->setFile($file);
-		}
-		if (empty($this->file)) {
-			throw new LogicException("Need a file to parse.");
-		}
-		$simpleParsed = parse_ini_file('settings.'.$this->file, $this->process_sections);
-		return $simpleParsed;
-	}
-
-	function setFile($file){
-		if (!file_exists($file) || !is_readable($file)) {
-			throw new InvalidArgumentException("The file '{$file}' cannot be opened.");
-		}
-		$this->file = $file;
-		return $this;
-	}/*
-
-	static function getSectionOfFile($file, $sectionName){
-		$settings = $this->parse($file);
-
-		$returnSection = array();
-		foreach($settings as $section){
-			if($section == uppercase($sectionName)){
-				$returnSection = $section;
-			}
-		}
-
-		return $returnSection;
-	}*/
 } 
