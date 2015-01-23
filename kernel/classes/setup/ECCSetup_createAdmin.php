@@ -119,6 +119,7 @@ prefix = ".$_SESSION['mysql']['prefix']."
 [STOCKAGE]
 path = ".dirname(dirname(dirname(dirname(__FILE__))))."
 url = ".$_SERVER["HTTP_HOST"]."
+dirPermissions = 0755
 
 [INFOS]
 version = 0.1
