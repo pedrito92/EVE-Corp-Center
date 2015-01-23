@@ -17,13 +17,13 @@ class ECCDir {
 	 * @return bool
 	 */
 	static function mkdir($dirName, $perm = false, $recursive = false){
-		if(file_exists($dirName))
+		if(file_exists($dirName)){
+			ECCDebug::instance()->write('debug.log', '', 'Can not create directory. Directory "' . $dirName . '" already exists.');
 			return false;
+		}
 
 		if(!$perm)
 			$perm = self::getDirectoryPermission();
-		else
-			$perm = octdec($perm);
 
 		$dirName = ECCDir::convertSeparators($dirName, ECCSystem::getFileSeparator());
 		$tmpPath = explode(ECCSystem::getFileSeparator(), $dirName);
@@ -37,15 +37,16 @@ class ECCDir {
 			} elseif(!file_exists($currentPath)) {
 				break;
 			} else {
-				//TODO: ECCDebug(error)
+				ECCDebug::instance()->write('error.log', '', 'Directory "'.$dirName.'" was not created because ECC can not write in "'.ECCINI::instance()->getVariable('storage', 'path').substr($currentPath,1).'".');
 				return false;
 			}
 		}
 		$success = @mkdir($dirName, $perm, $recursive);
 		if(!$success){
-			//TODO: ECCDebug(error)
+			ECCDebug::instance()->write('error.log', '', 'Directory "'.$dirName.'" was not created.');
 		} else {
-			//TODO: ECCDebug(log)
+			ECCDebug::instance()->write('debug.log', '', 'Directory "'.$dirName.'" was created.');
+
 		}
 
 		return $success;

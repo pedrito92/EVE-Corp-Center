@@ -116,7 +116,7 @@ passwd = ".$_SESSION['mysql']['passwd']."
 dbname = ".$_SESSION['mysql']['dbname']."
 prefix = ".$_SESSION['mysql']['prefix']."
 
-[STOCKAGE]
+[STORAGE]
 path = ".dirname(dirname(dirname(dirname(__FILE__))))."
 url = ".$_SERVER["HTTP_HOST"]."
 dirPermissions = 0755

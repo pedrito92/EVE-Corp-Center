@@ -2,6 +2,7 @@
 
 namespace kernel\classes\setup;
 
+use kernel\classes\ECCDir;
 use \PDO;
 use \Exception;
 
@@ -143,21 +144,10 @@ class ECCSetup_setupCore extends ECCSetup {
 	}
 
 	private function _setupFiles(){
-		if(!file_exists('settings')){
-			mkdir('settings/', 0755);
-		}
-		if(!file_exists('var/cache/pheal')){
-			mkdir('var/cache/pheal/', 0755, true);
-		}
-		if(!file_exists('var/cache/twig')){
-			mkdir('var/cache/twig/', 0755, true);
-		}
-		if(!file_exists('var/logs')){
-			mkdir('var/log/', 0755, true);
-		}
-		if(!file_exists('var/storage')){
-			mkdir('var/storage/', 0755, true);
-		}
+		ECCDir::mkdir('var/log',0755, true);
+		ECCDir::mkdir('settings',0755);
+		ECCDir::mkdir('var/cache/pheal',0755, true);
+		ECCDir::mkdir('var/cache/twig',0755, true);
 	}
 
 	function display(){
