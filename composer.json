@@ -1,0 +1,24 @@
+{
+  "name": "vendor_name/EVE Corp Center",
+  "description": "CMS for corporation of players in EVE Online.",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Florian Neveu",
+      "email": "hello@fnev.eu",
+      "homepage": "http://fnev.eu",
+      "role": "Developer"
+    },
+    {
+      "name": "Pierre Fayol",
+      "email": "contact@pierre-fayol.fr",
+      "homepage": "http://pierre-fayol.fr",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "3rdpartyeve/phealng": "2.1.0",
+    "twig/twig": "1.6.5"
+  }
+}

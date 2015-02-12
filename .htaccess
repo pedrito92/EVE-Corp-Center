@@ -10,6 +10,6 @@ RewriteRule ^var/* - [L]
 RewriteRule ^robots\.txt - [L]
 RewriteRule ^favicon\.ico - [L]
 
-RewriteRule .* index.php
+RewriteRule .* ECCApp.php
 
 # End EVE Corp Center
