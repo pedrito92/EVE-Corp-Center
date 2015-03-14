@@ -8,7 +8,13 @@
 
 namespace kernel\classes\game;
 
-
 class ECCApiKey {
 
+	function getApiKey($keyId){
+
+	}
+
+	function setApiKey($params){
+
+	}
 }

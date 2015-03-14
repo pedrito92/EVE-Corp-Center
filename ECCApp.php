@@ -7,12 +7,20 @@ if (version_compare(PHP_VERSION, '5.2') < 0){
     exit;
 }
 
+
 if(!ini_get("date.timezone")) {
     date_default_timezone_set("UTC");
 }
-//ini_set( "display_errors", 0);
 
 require_once('autoload.php');
+use kernel\classes\ECCSystem;
+
+
+
+if(!ECCSystem::getDebug()){
+	ini_set( "display_errors", 0);
+}
+
 session_start();
 
 kernel\RoutingHandler::init();

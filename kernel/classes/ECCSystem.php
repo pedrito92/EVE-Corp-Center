@@ -1,13 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: florianneveu
- * Date: 22/01/15
- * Time: 13:18
- */
 
 namespace kernel\classes;
 
+use kernel\classes\ECCINI;
 
 class ECCSystem {
 
@@ -18,6 +13,7 @@ class ECCSystem {
 	public $fileSystemType;
 	public $fileSeparator;
 	public $lineSeparator;
+	public $debug;
 
 	static public $instance;
 
@@ -51,6 +47,10 @@ class ECCSystem {
 			$this->fileSystemType = "unix";
 			$this->lineSeparator = "\n";
 		}
+
+		$ini = ECCINI::instance('core.ini','settings');
+		$this->debug = $ini->getVariable('infos','debug');
+
 		$this->fileSeparator = $this->params['DIRECTORY_SEPARATOR'];
 	}
 
@@ -96,6 +96,14 @@ class ECCSystem {
 	 */
 	public static function getLineSeparator(){
 		return self::instance()->lineSeparator;
+	}
+
+	/**
+	 * Returns the debug state
+	 * @return bool
+	 */
+	public static function getDebug(){
+		return self::instance()->debug;
 	}
 
 	/**

@@ -116,4 +116,8 @@ class ECCDB {
 	function debugDumpParams(){
 		return $this->stmt->debugDumpParams();
 	}
+
+	static function clearData($data){
+
+	}
 } 

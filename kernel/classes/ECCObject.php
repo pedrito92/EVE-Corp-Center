@@ -1,90 +1,85 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: florianneveu
- * Date: 29/10/14
- * Time: 23:53
- */
 
 namespace kernel\classes;
 
 class ECCObject {
 
-	public $name = null;
-	public $language = null;
-	public $published = null;
-	public $modified = null;
-	public $creator = null;
-	public $status = null;
 	public $datamap = null;
+	public $attributes = array(
+		'name' => null,
+		'language' => null,
+		'published' => null,
+		'modified' => null,
+		'creator' => null,
+		'status' => null);
+	public $ID = null;
 
-	function __construct($attributes){
-		$this->setName($attributes['name']);
-		$this->setLanguage($attributes['language']);
-		$this->setPublished($attributes['published']);
-		$this->setModified($attributes['modified']);
-		$this->setCreator($attributes['creator']);
-		$this->setStatus($attributes['status']);
+	function __construct($params = null){
+		if(is_numeric($params)){
+			$this::fetch($params);
+		}
 	}
 
-	function setName($name){
-		$this->name = $name;
+	function getAttribute($attribute){
+		if(array_key_exists($attribute, $this->attributes)){
+			return $this->attributes[$attribute];
+		}
 	}
 
-	function getName(){
-		return $this->name;
+	function setAttribute($attribute, $value){
+		if(array_key_exists($attribute, $this->attributes)){
+			$this->attributes[$attribute] = $value;
+			return true;
+		}
+		return false;
 	}
 
-	function setLanguage($language){
-		$this->language = $language;
+	function getData(){
+
 	}
 
-	function getLanguage(){
-		return $this->language;
+	function store(){
+		$db = ECCDB::instance();
+		$db->beginTransaction();
+
+		if($this->id === null) {
+			$db->query("INSERT INTO `ecc_objects` (`name`, `language`, `published`, `creator`, `status` )
+					VALUES (:name, :language, now(), :creator, :status);");
+
+			$db->bind(':language',	$this->attributes['language']);
+			$db->bind(':creator',	$this->attributes['creator']);
+		} else {
+			$db->query("UPDATE `ecc_objects` SET `name` = :name, `modified` = now(), `status` = :status WHERE `ID` = :id;");
+			$db->bind(':id', $this->id);
+		}
+		$db->bind(':name',		$this->attributes['name']);
+		$db->bind(':status',	$this->attributes['status']);
+		$db->bind(':status',	$this->attributes['status']);
+
+		$db->execute();
+		if($this->id === null)
+			$this->id = $db->lastInsertId();
+
+		$this->storeData($this->id, $this->datamap);
+
+		$db->endTransaction();
 	}
 
-	function setPublished($published){
-		$this->published = $published;
+	function storeData() {
+
 	}
 
-	function getPublished(){
-		return $this->published;
-	}
-
-	function setModified($modified){
-		$this->modified = $modified;
-	}
-
-	function getModified(){
-		return $this->modified;
-	}
-
-	function setCreator($creator){
-		$this->creator = $creator;
-	}
-
-	function getCreator(){
-		return $this->creator;
-	}
-
-	function setStatus($status){
-		$this->status = $status;
-	}
-
-	function getStatus(){
-		return $this->status;
-	}
-
-	function getDatamap(){
-		return $this->datamap;
-	}
-
-	static function fetch($ECCOBjectId){
+	function fetch($ECCObjectId, $showHidden = false){
 		$db = ECCDB::instance();
 
-		$db->query('SELECT * FROM ecc_objects WHERE ID = :id AND status = :status');
-		$db->bind(':id', $ECCOBjectId);
-		$db->bind(':status', 1);
+		$sql = 'SELECT * FROM ecc_objects WHERE ID = :id';
+		if(!$showHidden)
+			$sql .= ' AND status = :status';
+
+		$db->query($sql);
+		$db->bind(':id', $ECCObjectId);
+		if(!$showHidden)
+			$db->bind(':status', 1);
 
 		$row = $db->single();
 
@@ -94,7 +89,18 @@ class ECCObject {
 			print("<b>Error : not found</b>. The element is not accessible");
 			exit;
 		} else {
-			return new ECCObject($row);
+			foreach($row as $key => $attribute){
+				if($key == 'ID')
+					$this->ID = $attribute;
+				else
+					$this->setAttribute($key, $attribute);
+			}
+
+			/*
+			 * SELECT DATA OBJECT
+			 */
+
+			return $this;
 		}
 	}
 }
