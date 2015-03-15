@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: florianneveu
- * Date: 29/12/14
- * Time: 19:25
- */
 
 namespace kernel\classes\setup;
 
