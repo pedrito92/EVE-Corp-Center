@@ -22,6 +22,7 @@ class ECCSetup_setupCore extends ECCSetup {
 							`modified` DATETIME NULL DEFAULT NULL,
 							`creator` VARCHAR(255) NULL DEFAULT NULL,
 							`status` VARCHAR(45) NULL DEFAULT '1',
+							`ID_module` INT(11) NULL DEFAULT NULL,
 							PRIMARY KEY (`ID`))
 						ENGINE = InnoDB
 						DEFAULT CHARACTER SET = utf8
@@ -71,6 +72,15 @@ class ECCSetup_setupCore extends ECCSetup {
 						DEFAULT CHARACTER SET = utf8
 						COLLATE = utf8_general_ci;");
 			
+			$dbh->exec("CREATE TABLE `".$_SESSION['mysql']['dbname']."`.`".$_SESSION['mysql']['prefix']."modules` (
+							`ID` INT(11) NOT NULL AUTO_INCREMENT,
+							`name` VARCHAR(255) NULL DEFAULT NULL,
+							PRIMARY KEY (`ID`),
+							UNIQUE INDEX `UNIQUE` (`name` ASC))
+						ENGINE = InnoDB
+						DEFAULT CHARACTER SET = utf8
+						COLLATE = utf8_general_ci;");
+
 			$dbh->exec("CREATE TABLE `".$_SESSION['mysql']['dbname']."`.`".$_SESSION['mysql']['prefix']."alias` (
 							`ID` INT(11) NOT NULL AUTO_INCREMENT,
 							`ID_object` INT(11) NOT NULL,
@@ -102,21 +112,58 @@ class ECCSetup_setupCore extends ECCSetup {
 							1
 						);");
 
+			$dbh->exec("INSERT INTO `".$_SESSION['mysql']['dbname']."`.`".$_SESSION['mysql']['prefix']."modules` (
+							`ID`, `name`
+						) VALUES (
+							1,
+							'Page'
+						);");
+
+			$dbh->exec("INSERT INTO `".$_SESSION['mysql']['dbname']."`.`".$_SESSION['mysql']['prefix']."modules` (
+							`ID`, `name`
+						) VALUES (
+							2,
+							'Forum'
+						);");
+
+			$dbh->exec("INSERT INTO `".$_SESSION['mysql']['dbname']."`.`".$_SESSION['mysql']['prefix']."modules` (
+							`ID`, `name`
+						) VALUES (
+							3,
+							'Post'
+						);");
+
+			$dbh->exec("INSERT INTO `".$_SESSION['mysql']['dbname']."`.`".$_SESSION['mysql']['prefix']."modules` (
+							`ID`, `name`
+						) VALUES (
+							4,
+							'User'
+						);");
+
+			$dbh->exec("INSERT INTO `".$_SESSION['mysql']['dbname']."`.`".$_SESSION['mysql']['prefix']."modules` (
+							`ID`, `name`
+						) VALUES (
+							5,
+							'Killboard'
+						);");
+
 			$dbh->exec("INSERT INTO `".$_SESSION['mysql']['dbname']."`.`".$_SESSION['mysql']['prefix']."objects` (
-							`ID`, `name`, `language`, `published`, `creator`, `status`
+							`ID`, `name`, `language`, `published`, `creator`, `status`, `ID_module`
 						) VALUES (
 							2,
 							'Home',
 							'en-US',
 							NOW(),
 							'EVE Corp Center Installer',
+							1,
 							1
 						);");
 			$dbh->exec("INSERT INTO `".$_SESSION['mysql']['dbname']."`.`".$_SESSION['mysql']['prefix']."pages` (
-							`ID`, `ID_object`
+							`ID`, `ID_object`, `ID_parent`
 						) VALUES (
 							1,
-							2
+							2,
+							1
 						);");
 
 			$dbh->exec("INSERT INTO `".$_SESSION['mysql']['dbname']."`.`".$_SESSION['mysql']['prefix']."alias` (

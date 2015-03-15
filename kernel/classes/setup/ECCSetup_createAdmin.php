@@ -65,14 +65,15 @@ class ECCSetup_createAdmin extends ECCSetup {
 			$dbh->beginTransaction();
 
 			$qry = $dbh->prepare("INSERT INTO `".$_SESSION['mysql']['dbname']."`.`".$_SESSION['mysql']['prefix']."objects` (
-									`ID`, `name`, `language`, `published`, `creator`, `status`
+									`ID`, `name`, `language`, `published`, `creator`, `status`, `ID_module`
 								) VALUES (
 									4,
 									:username,
 									'en-US',
 									NOW(),
 									'EVE Corp Center Installer',
-									1
+									1,
+									4
 								);");
 			$qry->bindParam(':username', $username);
 			$qry->execute();
