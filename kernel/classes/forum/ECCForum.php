@@ -6,9 +6,9 @@
  * Time: 23:55
  */
 
-namespace kernel\classes\forums;
+namespace kernel\classes\forum;
 
 
-class ECCForums extends ECCObject {
+class ECCForum extends ECCObject {
 
 } 

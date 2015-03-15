@@ -124,6 +124,8 @@ dirPermissions = 0755
 
 [INFOS]
 version = 0.1
+debug = false
+cache = true
 ";
 		$mainSettingsFile = fopen('settings/core.ini.php', 'a');
 		fwrite($mainSettingsFile, $mainSettings);

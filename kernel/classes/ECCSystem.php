@@ -117,4 +117,13 @@ class ECCSystem {
 
 		return self::$instance;
 	}
+
+	public static function error($code){
+		switch($code){
+			case 404:
+				header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
+				print("<b>Error 404 : not found.</b><br>The element is not accessible");
+				exit;
+		}
+	}
 }

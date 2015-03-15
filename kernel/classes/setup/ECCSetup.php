@@ -8,17 +8,25 @@
 
 namespace kernel\classes\setup;
 
+use kernel\classes\ECCINI;
+
 class ECCSetup {
 
 	protected $dbh = null;
 
 	static function loadStep(){
-		if(!isset($_POST['ECCSetup_step']) || $_POST['ECCSetup_step'] == ''){
-			new ECCSetup_welcome;
+
+		if(!ECCINI::exist()){
+
+			if(!isset($_POST['ECCSetup_step']) || $_POST['ECCSetup_step'] == ''){
+				new ECCSetup_welcome;
+			} else {
+				$step = $_POST['ECCSetup_step'];
+				$stepController = '\kernel\classes\setup\ECCSetup_'.$step;
+				new $stepController;
+			}
 		} else {
-			$step = $_POST['ECCSetup_step'];
-			$stepController = '\kernel\classes\setup\ECCSetup_'.$step;
-			new $stepController;
+			header("Location: /");
 		}
 	}
 

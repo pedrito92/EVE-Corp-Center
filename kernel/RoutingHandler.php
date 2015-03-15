@@ -2,22 +2,20 @@
 
 namespace kernel;
 
+use kernel\classes\cms\ECCPage;
 use kernel\classes\ECCAlias;
 use kernel\classes\ECCINI;
 use kernel\classes\ECCSystem;
 use kernel\classes\ECCObject;
+use kernel\classes\user\ECCUser;
 use kernel\classes\setup\ECCSetup;
-/*use Pheal\Pheal;
-use Pheal\Core\Config;*/
-use Twig_Loader_Filesystem;
-use Twig_Environment;
-use Twig_Extension_Debug;
 
 class RoutingHandler {
 
 	public $server;
 	public $requestURI;
 	public $parsedURI;
+	public $module;
 	protected static $instance = null;
 
     private function __construct(){
@@ -37,29 +35,36 @@ class RoutingHandler {
 			header('Location: /setup');
 			exit;
         }
-		$this->parseURI();
 
-		if(isset($this->parsedURI[0]) && $this->parsedURI[0] == 'setup') {
+		$this->parseURI();
+		$this->getModule();
+
+		if($this->module == 'kernel\classes\setup\ECCSetup'){
 			ECCSetup::loadStep();
 			exit;
 		}
 
+		if($this->module == 'kernel\classes\user\ECCUser'){
+			if($this->parsedURI['1'] == 'login'){
+				require_once('kernel/user/login.php');
+				exit();
+			} elseif($this->parsedURI['1'] == 'logout'){
+				require_once('kernel/user/logout.php');
+				exit();
+			} elseif($this->parsedURI['1'] == 'register'){
+				require_once('kernel/user/register.php');
+				exit();
+			}
+		}
+
 		$ECCObjectId = ECCAlias::getECCObjectId($this->requestURI);
 
+		if(!$ECCObjectId)
+			ECCSystem::error(404);
 
-
-		$object = new ECCObject($ECCObjectId);
-
-		if(is_object($object)){
-
+		$object = new $this->module($ECCObjectId);
+		if($object instanceof ECCPage)
 			$object->exec();
-
-		} else {
-			header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
-			var_dump($_POST);
-			print("<b>Error : not found</b>. The element is not accessible");
-			exit;
-		}
 
 		/*Config::getInstance()->cache = new \Pheal\Cache\FileStorage('var/cache/pheal/');
 		Config::getInstance()->access = new \Pheal\Access\StaticCheck();
@@ -98,9 +103,37 @@ class RoutingHandler {
 				$e->getMessage()
 			);
 		}*/
-
-		exit;
     }
+
+	private function getModule(){
+		if(isset($this->parsedURI[0]) && $this->parsedURI[0] != '')
+			switch($this->parsedURI[0]){
+				case "setup":
+					$this->module = "kernel\classes\setup\ECCSetup";
+					break;
+
+				case "forums":
+					$this->module = "kernel\classes\forum\ECCForum";
+					break;
+
+				case "killboard":
+					$this->module = "kernel\classes\killboard\ECCKillboard";
+					break;
+
+				case "users":
+					$this->module = "kernel\classes\user\ECCUser";
+					break;
+
+				case "user":
+					$this->module = "kernel\classes\user\ECCUser";
+					break;
+
+				default:
+					$this->module = "kernel\classes\cms\ECCPage";
+			}
+		else
+			$this->module = "kernel\classes\cms\ECCPage";
+	}
 
 	private function parseURI(){
 		$parsedURI = array();

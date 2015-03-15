@@ -7,6 +7,9 @@
 	<!--[if lt IE 9]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
+	<title>{{ data.seo_title }}</title>
+	{% if data.seo_description %}
+	{% endif %}
 </head>
 <body>
 	<header>
@@ -17,13 +20,13 @@
 			</ul>
 		</nav>
 	</header>
+	<ul>
+		<li>{{ data.ID_parent }}</li>
+		<li>{{ object.name }}</li>
+	</ul>
 	<section id="content">
-		<p>Hello !</p>
-
-		<p>Tu es sur la page {{ object.attributes.name }}</p>
-		<pre>
-			{{ dump(object) }}
-		</pre>
+		{{ data.content|raw }}
+		{{ dump(current_user) }}
 	</section>
 	<footer>
 		© ECC

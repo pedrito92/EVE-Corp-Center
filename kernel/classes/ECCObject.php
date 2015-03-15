@@ -4,7 +4,7 @@ namespace kernel\classes;
 
 class ECCObject {
 
-	public $datamap = null;
+	public $data = null;
 	public $attributes = array(
 		'name' => null,
 		'language' => null,
@@ -15,9 +15,10 @@ class ECCObject {
 	public $ID = null;
 
 	function __construct($params = null){
-		if(is_numeric($params)){
+		if(is_numeric($params))
 			$this::fetch($params);
-		}
+
+		$this->getData($this->ID);
 	}
 
 	function getAttribute($attribute){
@@ -60,12 +61,12 @@ class ECCObject {
 		if($this->id === null)
 			$this->id = $db->lastInsertId();
 
-		$this->storeData($this->id, $this->datamap);
+		$this->storeData($this->id, $this->data);
 
 		$db->endTransaction();
 	}
 
-	function storeData() {
+	function storeData($id, $data) {
 
 	}
 
@@ -85,7 +86,6 @@ class ECCObject {
 
 		if(!$row){
 			header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
-			var_dump($_POST);
 			print("<b>Error : not found</b>. The element is not accessible");
 			exit;
 		} else {

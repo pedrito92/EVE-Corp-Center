@@ -11,11 +11,14 @@ class ECCAlias {
 	static function getECCObjectId($requestURI){
 		$db = ECCDB::instance();
 
-		$db->query('SELECT ID_object FROM ecc_alias WHERE url = :url');
+		$db->query('SELECT `ID_object` FROM `ecc_alias` WHERE BINARY `url` = :url');
 		$db->bind(':url', $requestURI);
 
 		$row = $db->single();
 
-		return $row['ID_object'];
+		if(!$row)
+			return false;
+		else
+			return (int)$row['ID_object'];
 	}
 } 
