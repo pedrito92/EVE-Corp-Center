@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d31045e233c6fe69cb2668160171b155",
+    "hash": "981b35055e9bab6c66b684604014c461",
     "packages": [
         {
             "name": "3rdpartyeve/phealng",
@@ -143,6 +143,7 @@
     "minimum-stability": "stable",
     "stability-flags": [],
     "prefer-stable": false,
+    "prefer-lowest": false,
     "platform": [],
     "platform-dev": []
 }
