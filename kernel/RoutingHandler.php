@@ -4,10 +4,7 @@ namespace kernel;
 
 use kernel\classes\cms\ECCPage;
 use kernel\classes\ECCAlias;
-use kernel\classes\ECCINI;
 use kernel\classes\ECCSystem;
-use kernel\classes\ECCObject;
-use kernel\classes\user\ECCUser;
 use kernel\classes\setup\ECCSetup;
 
 class RoutingHandler {

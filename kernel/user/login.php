@@ -35,7 +35,6 @@ if(isset($error) && $error != ''){
 }
 ?>
 
-
 <form action="/user/login" method="post">
 	<input type="hidden" name="ECCUserLogin" value="form">
 	<input type="text" name="ECCUserLogin_email" value="<?php if(isset($_POST['ECCUserLogin_email'])){ echo $_POST['ECCUserLogin_email']; } ?>" placeholder="E-mail">

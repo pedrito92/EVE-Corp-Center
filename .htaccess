@@ -1,5 +1,5 @@
 # Start EVE Corp Center
-DirectoryIndex index.php
+DirectoryIndex ECCApp.php
 
 Options +FollowSymlinks -MultiViews
 
