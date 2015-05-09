@@ -7,42 +7,16 @@
 	<!--[if lt IE 9]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
-	<title>{% block title %}{% endblock %}{#{{ data.seo_title }}#}</title>
-	{% if data.seo_description is defined %}
-		<meta name="description" content="{{ data.seo_description }}">
-	{% endif %}
-	{% if data.seo_keyword is defined %}
-		<meta name="keywords" content="{{ data.seo_keyword }}">
-	{% endif %}
+	{% include 'common/head.html.twig' %}
+
 	{% block head %}{% endblock %}
 </head>
 <body>
-	<header>
-		<h1>EVE Corp Center</h1>
-		<nav>
-			<ul>
-				<li><a href="#">Home</a></li>
-			</ul>
-		</nav>
-	</header>
-	{#<ul>
-		<li>{{ data.ID_parent }}</li>
-		<li>{{ object.name }}</li>
-	</ul>
-	<section id="content">
-		{{ data.content|raw }}
-		{{ dump(current_user) }}
-
-		{{ dump(data) }}
-		{{ dump(object) }}
-	</section>#}
+	{% include 'common/header.html.twig' %}
 
 	{% block content %}{% endblock %}
 
-	<footer>
-		{% block footer %}{% endblock %}
-		© ECC
-	</footer>
+	{% include 'common/footer.html.twig' %}
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script type="text/javascript" src="javascript/jquery.js"><\/script>')</script>
 </body>
