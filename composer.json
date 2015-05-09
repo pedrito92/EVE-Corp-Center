@@ -15,6 +15,12 @@
       "email": "contact@pierre-fayol.fr",
       "homepage": "http://pierre-fayol.fr",
       "role": "Developer"
+    },
+    {
+      "name": "Mélina Marignale",
+      "email": "melina@marignale.com",
+      "homepage": "http://melinamarignale.is",
+      "role": "Front-end developer"
     }
   ],
   "require": {
