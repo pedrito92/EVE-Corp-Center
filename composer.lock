@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "981b35055e9bab6c66b684604014c461",
+    "hash": "69ccb4e239cbc35c4890144c8c537eee",
     "packages": [
         {
             "name": "3rdpartyeve/phealng",
@@ -56,6 +56,53 @@
             "time": "2015-01-17 17:57:58"
         },
         {
+            "name": "mustangostang/spyc",
+            "version": "0.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mustangostang/spyc.git",
+                "reference": "dc4785b4d7227fd9905e086d499fb8abfadf9977"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mustangostang/spyc/zipball/dc4785b4d7227fd9905e086d499fb8abfadf9977",
+                "reference": "dc4785b4d7227fd9905e086d499fb8abfadf9977",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.5.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "Spyc.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT License"
+            ],
+            "authors": [
+                {
+                    "name": "mustangostang",
+                    "email": "vlad.andersen@gmail.com"
+                }
+            ],
+            "description": "A simple YAML loader/dumper class for PHP",
+            "homepage": "https://github.com/mustangostang/spyc/",
+            "keywords": [
+                "spyc",
+                "yaml",
+                "yml"
+            ],
+            "time": "2013-02-21 10:52:01"
+        },
+        {
             "name": "psr/log",
             "version": "1.0.0",
             "source": {
@@ -92,6 +139,52 @@
                 "psr-3"
             ],
             "time": "2012-12-21 11:40:51"
+        },
+        {
+            "name": "szakalq/php-i18n",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/szakalq/php-i18n.git",
+                "reference": "bca3f9e5a4d205bd251b2a82435f0a25a65a67a4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/szakalq/php-i18n/zipball/bca3f9e5a4d205bd251b2a82435f0a25a65a67a4",
+                "reference": "bca3f9e5a4d205bd251b2a82435f0a25a65a67a4",
+                "shasum": ""
+            },
+            "require": {
+                "mustangostang/spyc": "0.5.*@dev"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/i18n.class.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Philipp15b",
+                    "email": "github@philworld.de",
+                    "role": "developer"
+                },
+                {
+                    "name": "szakalq",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP Internationalization",
+            "homepage": "https://github.com/szakalq/php-i18n",
+            "keywords": [
+                "i18n",
+                "internationalization"
+            ],
+            "time": "2015-01-20 10:37:52"
         },
         {
             "name": "twig/twig",
@@ -141,7 +234,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "szakalq/php-i18n": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
