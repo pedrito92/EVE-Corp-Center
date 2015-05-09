@@ -35,8 +35,16 @@ class ECCTemplate {
 		$this->twigParams[$key] = $value;
 	}
 
-	function display($template = 'page.html.twig', $params){
-		echo $this->twig->render($template, $params);
+	function display($template = 'page.html.twig', $params = array()){
+
+		try{
+			echo $this->twig->render($template, $params);
+		}catch (\Exception $e){
+			$debug = ECCDebug::instance();
+			$debug->write('error.log', '', '[ECCTemplate] '.$e->getMessage());
+			$this->loadDefaultTheme();
+			echo $this->twig->render($template, $params);
+		}
 
 		/*	array('object'		=> (array)$this->attributes,
 				'object_id'		=> $this->ID,
@@ -52,7 +60,21 @@ class ECCTemplate {
 	public function getTheme(){
 		$ini	= ECCINI::instance('design.ini');
 		$path	= $ini->getVariable('theme','path');
-		$this->theme = new Twig_Loader_Filesystem('design/'.$path);
+
+		if(ECCDir::isExist('design/'.$path))
+			$this->theme = new Twig_Loader_Filesystem('design/'.$path);
+		else
+			$this->loadDefaultTheme();
+	}
+
+	private function loadDefaultTheme(){
+		$this->theme = new Twig_Loader_Filesystem('design/default');
+		$this->twig	= new Twig_Environment($this->theme, $this->twigParams);
+
+		if(ECCSystem::getDebug())
+			$this->twig->addExtension(new \Twig_Extension_Debug());
+
+		$this->twig->addExtension(new Twig_Extension_Optimizer());
 	}
 
 	public static function instance(){

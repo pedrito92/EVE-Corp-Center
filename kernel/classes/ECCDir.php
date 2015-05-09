@@ -84,4 +84,8 @@ class ECCDir {
 		unlink( $tmpFileName );
 		return true;
 	}
+
+	static function isExist($dirName){
+		return file_exists($dirName);
+	}
 }
