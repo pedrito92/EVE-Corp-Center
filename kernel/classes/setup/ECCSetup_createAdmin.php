@@ -130,5 +130,13 @@ cache = true
 		$mainSettingsFile = fopen('settings/core.ini.php', 'a');
 		fwrite($mainSettingsFile, $mainSettings);
 		fclose($mainSettingsFile);
+
+		$designSettings = "<?php /*
+[THEME]
+path = default
+";
+		$designSettingsFile = fopen('settings/design.ini.php', 'a');
+		fwrite($designSettingsFile, $designSettings);
+		fclose($designSettingsFile);
 	}
-} 
+}
