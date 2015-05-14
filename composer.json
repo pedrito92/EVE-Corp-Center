@@ -26,6 +26,7 @@
   "require": {
     "3rdpartyeve/phealng": "2.1.0",
     "twig/twig": "1.6.5",
-    "szakalq/php-i18n": "dev-master"
+    "szakalq/php-i18n": "dev-master",
+    "phpmailer/phpmailer": "~5.2"
   }
 }

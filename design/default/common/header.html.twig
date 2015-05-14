@@ -5,6 +5,7 @@
 			<li><a href="#">Home</a></li>
 			{% if current_user is empty %}
 				<li><a href="/user/login">Login</a></li>
+				<li><a href="/user/register">Register</a></li>
 			{% else %}
 				<li><a href="/user/logout">Logout</a></li>
 			{% endif %}

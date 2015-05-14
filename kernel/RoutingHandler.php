@@ -6,6 +6,7 @@ use kernel\classes\cms\ECCPage;
 use kernel\classes\ECCAlias;
 use kernel\classes\ECCSystem;
 use kernel\classes\setup\ECCSetup;
+use kernel\classes\user\ECCUser;
 
 class RoutingHandler {
 
@@ -43,13 +44,13 @@ class RoutingHandler {
 
 		if($this->module == 'kernel\classes\user\ECCUser'){
 			if($this->parsedURI['1'] == 'login'){
-				require_once('kernel/user/login.php');
+                ECCUser::login();
 				exit();
 			} elseif($this->parsedURI['1'] == 'logout'){
-				require_once('kernel/user/logout.php');
+                ECCUser::logout();
 				exit();
 			} elseif($this->parsedURI['1'] == 'register'){
-				require_once('kernel/user/register.php');
+                ECCUser::register();
 				exit();
 			}
 		}

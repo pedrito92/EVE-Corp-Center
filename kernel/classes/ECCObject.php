@@ -35,8 +35,10 @@ class ECCObject {
 		return false;
 	}
 
-	function getData(){
-
+	function getData($attribute){
+        if(array_key_exists($attribute, $this->data)){
+            return $this->data[$attribute];
+        }
 	}
 
 	function store(){

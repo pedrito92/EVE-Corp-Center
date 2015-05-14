@@ -1,0 +1,30 @@
+{% extends "layout.html.twig" %}
+
+
+{% block title %}Register{% endblock %}
+
+
+{% block content %}
+    {% if errors is defined %}
+        <ul>
+            {% for error in errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form action="/user/register" method="post">
+        <input type="hidden" name="ECCUserRegister" value="form">
+        <label for="ECCUserRegister_name">Your pseudo :</label>
+        <input type="text" id="ECCUserRegister_name" name="ECCUserRegister_name" value="{% if ECCUserRegister_name is defined %}{{ ECCUserRegister_name }}{% endif %}" placeholder="Pseudo">
+
+        <label for="ECCUserRegister_email">Your e-mail adress :</label>
+        <input type="text" id="ECCUserRegister_email" name="ECCUserRegister_email" value="{% if ECCUserRegister_email is defined %}{{ ECCUserRegister_email }}{% endif %}" placeholder="you@domain.tld">
+
+        <label for="ECCUserRegister_passwd">Your password :</label>
+        <input type="password" id="ECCUserRegister_passwd" name="ECCUserRegister_passwd" value="" placeholder="********">
+        <label for="ECCUserRegister_repasswd">Your password again :</label>
+        <input type="password" id="ECCUserRegister_repasswd" name="ECCUserRegister_repasswd" value="" placeholder="********">
+        <input type="submit" value="ok">
+    </form>
+{% endblock %}
