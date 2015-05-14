@@ -11,7 +11,7 @@
     <h2><?php echo WELCOME_SETUP; ?></h2>
 
     <form action="/setup" method="post">
-        <?php echo MYSQL_CONNEXION; ?>
+        <?php echo ADMIN_TEXT; ?>
 
         <?php if(isset($createAdmin['errorForm']) && $createAdmin['errorForm'] != '') {
             echo "<p>".$createAdmin['errorForm']."</p>";
