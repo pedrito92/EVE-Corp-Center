@@ -18,7 +18,7 @@ class ECCObject {
 		if(is_numeric($params))
 			$this::fetch($params);
 
-		$this->getData($this->ID);
+		$this->getAllData($this->ID);
 	}
 
 	function getAttribute($attribute){
@@ -68,7 +68,10 @@ class ECCObject {
 		$db->endTransaction();
 	}
 
-	function storeData($id, $data) {
+	function storeData($id, $data){
+
+	}
+	function getAllData(){
 
 	}
 

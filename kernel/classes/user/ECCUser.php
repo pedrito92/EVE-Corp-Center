@@ -15,7 +15,7 @@ class ECCUser extends ECCObject {
         "password" => null
     ];
 
-	function getData(){
+	function getAllData(){
 		$db = ECCDB::instance();
 		$db->query("SELECT `ID`, `email` FROM `ecc_users` WHERE `ID_object` = :id;");
 		$db->bind(':id',$this->ID);

@@ -3,15 +3,17 @@
 namespace kernel\classes\cms;
 use kernel\classes\ECCDB;
 use kernel\classes\ECCObject;
-use kernel\classes\ECCINI;
-use kernel\classes\ECCSystem;
 use kernel\classes\ECCTemplate;
-use Twig_Loader_Filesystem;
-use Twig_Environment;
-use Twig_Extension_Debug;
-use Twig_Extension_Optimizer;
 
 class ECCPage extends ECCObject {
+
+	public $data = [
+		'content'			=> null,
+		'seo_title'			=> null,
+		'seo_description'	=> null,
+		'seo_keywords'		=> null,
+		'ID_parent'			=> 2
+	];
 
 	function exec(){
 		$ECCTemplate = ECCTemplate::instance();
@@ -36,9 +38,9 @@ class ECCPage extends ECCObject {
 		}
 	}
 
-	function getData(){
+	function getAllData(){
 		$db = ECCDB::instance();
-		$db->query("SELECT `content`, `seo_title`, `seo_keywords`, `seo_description`, `ID_parent` FROM `ecc_pages` WHERE `ID_object` = :id;");
+		$db->query("SELECT `ID`, `content`, `seo_title`, `seo_keywords`, `seo_description`, `ID_parent` FROM `ecc_pages` WHERE `ID_object` = :id;");
 		$db->bind(':id',$this->ID);
 		$row = $db->single();
 
