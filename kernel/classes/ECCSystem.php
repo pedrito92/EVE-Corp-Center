@@ -2,8 +2,6 @@
 
 namespace kernel\classes;
 
-use kernel\classes\ECCINI;
-
 class ECCSystem {
 
 	public $params;
