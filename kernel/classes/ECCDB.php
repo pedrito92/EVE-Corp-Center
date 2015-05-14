@@ -15,6 +15,7 @@ class ECCDB {
 	private $dbname;
 	private $username;
 	private $passwd;
+	private $prefix;
 
 	private $dbh;
 	private $error;
@@ -22,11 +23,15 @@ class ECCDB {
 
 	protected function __construct(){
 		$ini = ECCINI::instance();
-		$this->host 	= $ini->getVariable('database', 'host');
-		$this->port		= $ini->getVariable('database', 'port');
-		$this->dbname	= $ini->getVariable('database', 'dbname');
-		$this->username	= $ini->getVariable('database', 'username');
-		$this->passwd	= $ini->getVariable('database', 'passwd');
+
+		$infos = $ini->getSection('database');
+
+		$this->host 	= $infos['host'];
+		$this->port		= $infos['port'];
+		$this->dbname	= $infos['dbname'];
+		$this->username	= $infos['username'];
+		$this->passwd	= $infos['passwd'];
+		$this->prefix	= $infos['prefix'];
 
 		$dsn = 'mysql:host='.$this->host.';port='.$this->port.';dbname='.$this->dbname;
 
@@ -54,6 +59,10 @@ class ECCDB {
 		}
 		
 		return self::$instance;
+	}
+
+	public function getPrefix(){
+		return $this->prefix;
 	}
 
 	function query($query){
@@ -116,8 +125,4 @@ class ECCDB {
 	function debugDumpParams(){
 		return $this->stmt->debugDumpParams();
 	}
-
-	static function clearData($data){
-
-	}
-} 
+}

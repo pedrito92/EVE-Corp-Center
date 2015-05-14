@@ -16,8 +16,10 @@ class ECCUser extends ECCObject {
     ];
 
 	function getAllData(){
-		$db = ECCDB::instance();
-		$db->query("SELECT `ID`, `email` FROM `ecc_users` WHERE `ID_object` = :id;");
+		$db 		= ECCDB::instance();
+		$dbprefix 	= $db->getPrefix();
+
+		$db->query("SELECT `ID`, `email` FROM `".$dbprefix."users` WHERE `ID_object` = :id;");
 		$db->bind(':id',$this->ID);
 		$row = $db->single();
 
@@ -29,8 +31,10 @@ class ECCUser extends ECCObject {
     }
 
 	function isPasswdOk($passwd){
-		$db = ECCDB::instance();
-		$db->query("SELECT `passwd` FROM `ecc_users` WHERE `ID` = :id;");
+		$db 		= ECCDB::instance();
+		$dbprefix 	= $db->getPrefix();
+
+		$db->query("SELECT `passwd` FROM `".$dbprefix."users` WHERE `ID` = :id;");
 		$db->bind(':id',$this->data['ID']);
 		$row = $db->single();
 
@@ -42,8 +46,10 @@ class ECCUser extends ECCObject {
 
 	public static function fetchByEmail($email){
 		if($email != '' && filter_var($email, FILTER_VALIDATE_EMAIL)){
-			$db = ECCDB::instance();
-			$db->query("SELECT `ID`, `ID_object`, `email`, `passwd` FROM `ecc_users` WHERE `email` = :email;");
+			$db 		= ECCDB::instance();
+			$dbprefix 	= $db->getPrefix();
+
+			$db->query("SELECT `ID`, `ID_object`, `email`, `passwd` FROM `".$dbprefix."users` WHERE `email` = :email;");
 			$db->bind(':email', $email);
 			$row = $db->single();
 
@@ -151,9 +157,10 @@ class ECCUser extends ECCObject {
     }
 
     function storeData($id, $data){
-        $db = ECCDB::instance();
+		$db 		= ECCDB::instance();
+		$dbprefix 	= $db->getPrefix();
 
-        $db->query("INSERT INTO `ecc_users`(`ID_object`, `email`, `passwd`)
+        $db->query("INSERT INTO `".$dbprefix."users`(`ID_object`, `email`, `passwd`)
                     VALUES (:idObject, :email, :pwd);");
         $db->bind(":idObject", $id);
         $db->bind(":email", $data["email"]);
@@ -176,7 +183,7 @@ class ECCUser extends ECCObject {
 
         $url = ECCINI::instance();
         $url = $url->getVariable('storage', 'url');
-        $url = $url."/user/validateRegister?".md5('ECCVALIDATE:'.$to);
+        $url .= "/user/validateRegister?".md5('ECCVALIDATE:'.$to);
 
         $message = "Pour valider votre inscription à ECC, cliquer sur le lien suivant: <a href='".$url."'>".$url."</a>";
 

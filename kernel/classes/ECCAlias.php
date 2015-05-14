@@ -9,9 +9,10 @@ class ECCAlias {
 	 * @return mixed
 	 */
 	static function getECCObjectId($requestURI){
-		$db = ECCDB::instance();
+		$db 		= ECCDB::instance();
+		$dbprefix	= $db->getPrefix();
 
-		$db->query('SELECT `ID_object` FROM `ecc_alias` WHERE BINARY `url` = :url');
+		$db->query('SELECT `ID_object` FROM `'.$dbprefix.'alias` WHERE BINARY `url` = :url');
 		$db->bind(':url', $requestURI);
 
 		$row = $db->single();

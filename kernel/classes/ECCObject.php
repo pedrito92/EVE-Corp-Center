@@ -50,17 +50,19 @@ class ECCObject {
 	}
 
 	function store(){
-		$db = ECCDB::instance();
+		$db 		= ECCDB::instance();
+		$dbprefix 	= $db->getPrefix();
+
 		$db->beginTransaction();
 
 		if($this->id === null) {
-			$db->query("INSERT INTO `ecc_objects` (`name`, `language`, `published`, `creator`, `status` )
+			$db->query("INSERT INTO `".$dbprefix."objects` (`name`, `language`, `published`, `creator`, `status` )
 					VALUES (:name, :language, now(), :creator, :status);");
 
 			$db->bind(':language',	$this->attributes['language']);
 			$db->bind(':creator',	$this->attributes['creator']);
 		} else {
-			$db->query("UPDATE `ecc_objects` SET `name` = :name, `modified` = now(), `status` = :status WHERE `ID` = :id;");
+			$db->query("UPDATE `".$dbprefix."objects` SET `name` = :name, `modified` = now(), `status` = :status WHERE `ID` = :id;");
 			$db->bind(':id', $this->id);
 		}
 		$db->bind(':name',		$this->attributes['name']);
@@ -84,9 +86,10 @@ class ECCObject {
 	}
 
 	function fetch($ECCObjectId, $showHidden = false){
-		$db = ECCDB::instance();
+		$db 		= ECCDB::instance();
+		$dbprefix 	= $db->getPrefix();
 
-		$sql = 'SELECT * FROM ecc_objects WHERE ID = :id';
+		$sql = 'SELECT * FROM `'.$dbprefix.'objects` WHERE `ID` = :id';
 		if(!$showHidden)
 			$sql .= ' AND status = :status';
 
