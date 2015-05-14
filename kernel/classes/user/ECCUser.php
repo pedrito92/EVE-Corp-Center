@@ -134,8 +134,8 @@ class ECCUser extends ECCObject {
                 $userRegister->setAttribute('status', 1);
                 $userRegister->setAttribute('creator', $_POST['ECCUserRegister_name']);
 
-                $userRegister->data["email"] = $_POST['ECCUserRegister_email'];
-                $userRegister->data["password"] = $userRegister->generatePassword($_POST['ECCUserLogin_email'],$_POST['ECCUserLogin_passwd']);
+                $userRegister->setData('email', $_POST['ECCUserRegister_email']);
+                $userRegister->setData('password', $userRegister->generatePassword($_POST['ECCUserLogin_email'],$_POST['ECCUserLogin_passwd']));
 
                 $userRegister->store();
 
@@ -164,7 +164,7 @@ class ECCUser extends ECCObject {
 
     function logRegister(){
         $debug = ECCDebug::instance();
-        $debug->write('register.log','', 'User registered: '.$this->getAttribute("name"));
+        $debug->write('infos.log','', '[ECCUser] New user registered : '.$this->getAttribute("name").' ('.$this->ID.')');
     }
 
     function sendEmail(){

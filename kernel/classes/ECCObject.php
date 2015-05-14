@@ -5,13 +5,13 @@ namespace kernel\classes;
 class ECCObject {
 
 	public $data = null;
-	public $attributes = array(
+	public $attributes = [
 		'name' => null,
 		'language' => null,
 		'published' => null,
 		'modified' => null,
 		'creator' => null,
-		'status' => null);
+		'status' => null];
 	public $ID = null;
 
 	function __construct($params = null){
@@ -39,6 +39,14 @@ class ECCObject {
         if(array_key_exists($attribute, $this->data)){
             return $this->data[$attribute];
         }
+	}
+
+	function setData($data, $value){
+		if(array_key_exists($data, $this->$data)){
+			$this->$data[$data] = $value;
+			return true;
+		}
+		return false;
 	}
 
 	function store(){
