@@ -30,6 +30,7 @@ define("MYSQL_ERROR_SUCCESS", "¡Muy logrado!");
 
 define("MYSQL_INSTALL_SUCCESS", "¡Muy logrado!");
 
+define("ADMIN_TEXT", "");
 define("ADMIN_ERROR_EMAIL", "Introduzca email");
 define("ADMIN_ERROR_VALIDATION_EMAIL", "");
 define("ADMIN_ERROR_PASS", "Introduzca una clave");

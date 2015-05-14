@@ -30,6 +30,7 @@ define("MYSQL_ERROR_SUCCESS", "Connexion à la base de données réussie.");
 
 define("MYSQL_INSTALL_SUCCESS", "Installation de la base de données réussie.");
 
+define("ADMIN_TEXT", "Création du compte administrateur.");
 define("ADMIN_ERROR_EMAIL", "Veuillez saisir votre adresse courriel.");
 define("ADMIN_ERROR_VALIDATION_EMAIL", "Veuillez renseigner une adresse courriel valide.");
 define("ADMIN_ERROR_PASS", "Veuillez renseigner un mot de passe.");
