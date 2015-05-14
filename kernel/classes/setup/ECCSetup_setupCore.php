@@ -195,6 +195,7 @@ class ECCSetup_setupCore extends ECCSetup {
 		ECCDir::mkdir('settings',0755);
 		ECCDir::mkdir('var/cache/pheal',0755, true);
 		ECCDir::mkdir('var/cache/twig',0755, true);
+		ECCDir::mkdir('var/cache/i18n',0755, true);
 	}
 
 	function display(){
