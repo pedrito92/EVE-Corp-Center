@@ -52,6 +52,12 @@ class RoutingHandler {
 			} elseif($this->parsedURI['1'] == 'register'){
                 ECCUser::register();
 				exit();
+			} elseif($this->parsedURI['1'] == 'passwordReset'){
+                ECCUser::passwordReset();
+				exit();
+			} elseif($this->parsedURI['1'] == 'password'){
+                ECCUser::password();
+				exit();
 			}
 		}
 

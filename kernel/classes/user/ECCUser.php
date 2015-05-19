@@ -38,7 +38,7 @@ class ECCUser extends ECCObject {
 		$db->bind(':id',$this->data['ID']);
 		$row = $db->single();
 
-		if(sha1($passwd) == $row['passwd'])
+		if($passwd == $row['passwd'])
 			return true;
 
 		return false;
@@ -90,7 +90,7 @@ class ECCUser extends ECCObject {
             }
         }
 
-        $params = [];
+        $params = ['current_user'	=> (array)$_SESSION['currentUser']];
         if(isset($_POST['ECCUserLogin_email']))
             $params['ECCUserLogin_email'] = $_POST['ECCUserLogin_email'];
 
@@ -153,7 +153,96 @@ class ECCUser extends ECCObject {
         }
 
         $params = [];
+
+        if(isset($errors))
+            $params['errors'] = $errors;
+
         $template->display('user/register.html.twig', $params);
+    }
+
+    static function passwordReset(){
+        $template = ECCTemplate::instance();
+
+        if(isset($_POST['ECCUserPasswordReset']) && $_POST['ECCUserPasswordReset'] === 'form') {
+            $errors = array();
+            if (!isset($_POST['ECCUserPasswordReset_email']) || $_POST['ECCUserPasswordReset_email'] == '')
+                $errors[] = "Adresse e-mail obligatoire";
+
+            if (!filter_var($_POST['ECCUserPasswordReset_email'], FILTER_VALIDATE_EMAIL))
+                $errors[] = "Adresse e-mail invalide";
+
+            $userExist = ECCUser::fetchByEmail($_POST['ECCUserPasswordReset_email']);
+            if($userExist instanceof ECCUser){
+                $errors[] = "Un compte utilise déjà ce mail";
+            }
+        }
+
+        $params = [];
+
+        if(isset($errors))
+            $params['errors'] = $errors;
+
+        $template->display('user/passwordReset.html.twig', $params);
+
+    }
+
+    static function password(){
+        $template = ECCTemplate::instance();
+
+        if($_SESSION['currentUser'] instanceof ECCUser){
+            $user = $_SESSION['currentUser'];
+            $email = $user->data['email'];
+
+            if(isset($_POST['ECCUserPassword']) && $_POST['ECCUserPassword'] === 'form') {
+                $errors = array();
+
+                if(!isset($_POST['ECCUserPassword_oldpasswd']) || $_POST['ECCUserPassword_oldpasswd'] == '')
+                    $errors[] = "Ancien mot de passe obligatoire";
+
+                if(!isset($_POST['ECCUserPassword_passwd']) || $_POST['ECCUserPassword_passwd'] == '')
+                    $errors[] = "Mot de passe obligatoire";
+
+                if($_POST['ECCUserPassword_passwd'] != $_POST['ECCUserPassword_repasswd'])
+                    $errors[] = "Les mots de passe doivent être identiques";
+
+
+                $pwd = $user->generatePassword($email, $_POST['ECCUserPassword_oldpasswd']);
+
+                if(!$user->isPasswdOk($pwd))
+                    $errors[] = "Votre ancien mot de passe ne correspond pas.";
+
+                if(count($errors) > 0)
+                    goto error;
+
+                $password = $user->generatePassword($email, $_POST['ECCUserPassword_passwd']);
+                $succes = $user->updatePassword($user->data["ID"],$password);
+            }
+        }
+
+        error:
+
+        $params = ['current_user'	=> (array)$_SESSION['currentUser']];
+
+        if(isset($errors))
+            $params['errors'] = $errors;
+
+        if(isset($succes))
+            $params['succes'] = 'Votre mot de passe a été changé.';
+
+        $template->display('user/password.html.twig', $params);
+
+    }
+
+    function updatePassword($id, $password){
+        $db = ECCDB::instance();
+        $dbprefix 	= $db->getPrefix();
+
+        $db->query("UPDATE `".$dbprefix."users`
+                    SET `passwd` = :passwd
+                    WHERE `ID` = :id;");
+        $db->bind(":id", $id);
+        $db->bind(":passwd", $password);
+        return $db->execute();
     }
 
     function storeData($id, $data){
@@ -172,6 +261,11 @@ class ECCUser extends ECCObject {
     function logRegister(){
         $debug = ECCDebug::instance();
         $debug->write('infos.log','', '[ECCUser] New user registered : '.$this->getAttribute("name").' ('.$this->ID.')');
+    }
+
+    function logPasswordReset(){
+        $debug = ECCDebug::instance();
+        $debug->write('accounts.log','', '[ECCUser] User password reset: '.$this->getAttribute("name"));
     }
 
     function sendEmail(){
