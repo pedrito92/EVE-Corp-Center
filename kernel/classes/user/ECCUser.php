@@ -287,19 +287,4 @@ class ECCUser extends ECCObject {
 
         mail($to, $subject, $message, $headers);
     }
-
-	static function routing($parsedURI){
-		if($parsedURI['1'] == 'login'){
-			self::login();
-		} elseif($parsedURI['1'] == 'logout'){
-			self::logout();
-		} elseif($parsedURI['1'] == 'register'){
-			self::register();
-		} elseif($parsedURI['1'] == 'passwordReset'){
-			self::passwordReset();
-		} elseif($parsedURI['1'] == 'password'){
-			self::password();
-		}
-		exit;
-	}
 }

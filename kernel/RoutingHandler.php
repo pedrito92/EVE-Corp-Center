@@ -43,13 +43,19 @@ class RoutingHandler {
 			exit;
 		}
 
-		/* TODO : Déplacer ce code dans ECCUser */
 		if($this->module == 'kernel\classes\user\ECCUser'){
-			ECCUser::routing($this->parsedURI);
+			$method	= $this->parsedURI['1'];
+			$class	= $this->module;
+
+			if(method_exists($class, $method))
+				$class::$method();
+			else
+				ECCSystem::error(404);
+			exit;
 		}
 
 		if($this->module == 'kernel\classes\admin\ECCAdmin'){
-			ECCAdmin::routing();
+			ECCAdmin::routing($this->parsedURI);
 		}
 
 		$ECCObjectId = ECCAlias::getECCObjectId($this->requestURI);
