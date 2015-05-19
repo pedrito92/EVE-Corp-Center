@@ -30,7 +30,7 @@ class ECCDebug {
 			if(!$ip)
 				$ip = ECCINI::instance()->getVariable('storage','url');
 
-			$log = '['.$time->format('Y-m-d H:i:s').']['.$ip.'] '.$string.ECCSystem::getLineSeparator();
+			$log = '['.$time->format('Y-m-d H:i:s').'] ['.$ip.'] '.$string.ECCSystem::getLineSeparator();
 
 			@fwrite($logFile, $log);
 			@fclose($logFile);

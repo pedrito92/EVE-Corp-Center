@@ -2,6 +2,8 @@
 
 namespace kernel\classes;
 
+use kernel\RoutingHandler;
+
 class ECCSystem {
 
 	public $params;
@@ -119,6 +121,7 @@ class ECCSystem {
 	public static function error($code){
 		switch($code){
 			case 404:
+				ECCDebug::instance()->write('error.log', '', '[RoutingHandler] "'.RoutingHandler::instance()->requestURI.'" was not found or is not accessible.');
 				header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
 				print("<b>Error 404 : not found.</b><br>The element is not accessible");
 				exit;
