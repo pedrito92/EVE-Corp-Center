@@ -7,6 +7,7 @@ use kernel\classes\ECCAlias;
 use kernel\classes\ECCSystem;
 use kernel\classes\setup\ECCSetup;
 use kernel\classes\user\ECCUser;
+use kernel\classes\admin\ECCAdmin;
 
 class RoutingHandler {
 
@@ -42,23 +43,13 @@ class RoutingHandler {
 			exit;
 		}
 
+		/* TODO : Déplacer ce code dans ECCUser */
 		if($this->module == 'kernel\classes\user\ECCUser'){
-			if($this->parsedURI['1'] == 'login'){
-                ECCUser::login();
-				exit();
-			} elseif($this->parsedURI['1'] == 'logout'){
-                ECCUser::logout();
-				exit();
-			} elseif($this->parsedURI['1'] == 'register'){
-                ECCUser::register();
-				exit();
-			} elseif($this->parsedURI['1'] == 'passwordReset'){
-                ECCUser::passwordReset();
-				exit();
-			} elseif($this->parsedURI['1'] == 'password'){
-                ECCUser::password();
-				exit();
-			}
+			ECCUser::routing($this->parsedURI);
+		}
+
+		if($this->module == 'kernel\classes\admin\ECCAdmin'){
+			ECCAdmin::routing();
 		}
 
 		$ECCObjectId = ECCAlias::getECCObjectId($this->requestURI);
@@ -124,12 +115,12 @@ class RoutingHandler {
 					$this->module = "kernel\classes\killboard\ECCKillboard";
 					break;
 
-				case "users":
+				case "user":
 					$this->module = "kernel\classes\user\ECCUser";
 					break;
 
-				case "user":
-					$this->module = "kernel\classes\user\ECCUser";
+				case "admin":
+					$this->module = "kernel\classes\admin\ECCAdmin";
 					break;
 
 				default:
