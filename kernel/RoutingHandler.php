@@ -6,8 +6,6 @@ use kernel\classes\cms\ECCPage;
 use kernel\classes\ECCAlias;
 use kernel\classes\ECCSystem;
 use kernel\classes\setup\ECCSetup;
-use kernel\classes\user\ECCUser;
-use kernel\classes\admin\ECCAdmin;
 
 class RoutingHandler {
 
