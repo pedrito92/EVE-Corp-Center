@@ -13,7 +13,7 @@ class ECCTemplate {
 	protected $twigParams = [];
 	public $theme;
 
-	protected function __construct(){
+	protected function __construct($themeDir = null){
 		$ini	= ECCINI::instance();
 		$cache	= $ini->getVariable('infos','cache');
 
@@ -22,7 +22,7 @@ class ECCTemplate {
 		if(ECCSystem::getDebug())
 			$this->setParams('debug', true);
 
-		$this->getTheme();
+		$this->setTheme($themeDir);
 		$this->twig	= new Twig_Environment($this->theme, $this->twigParams);
 
 		if(ECCSystem::getDebug())
@@ -54,13 +54,19 @@ class ECCTemplate {
 )		;*/
 	}
 
+	public function setTheme($themeDir = null){
+		if(is_null($themeDir))
+			$path = ECCINI::instance('design.ini')->getVariable('theme','path');
+		else
+			$path = $themeDir;
+
+		$this->getTheme($path);
+	}
+
 	/**
 	 * get theme used by ECC, and create the loader for Twig
 	 */
-	public function getTheme(){
-		$ini	= ECCINI::instance('design.ini');
-		$path	= $ini->getVariable('theme','path');
-
+	public function getTheme($path){
 		if(ECCDir::isExist('design/'.$path))
 			$this->theme = new Twig_Loader_Filesystem('design/'.$path);
 		else
@@ -77,9 +83,9 @@ class ECCTemplate {
 		$this->twig->addExtension(new Twig_Extension_Optimizer());
 	}
 
-	public static function instance(){
+	public static function instance($themeDir = null){
 		if(!self::$instance instanceof self){
-			self::$instance = new self;
+			self::$instance = new self($themeDir);
 		}
 
 		return self::$instance;
