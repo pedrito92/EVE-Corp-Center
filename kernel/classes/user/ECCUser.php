@@ -7,6 +7,7 @@ use kernel\classes\ECCDebug;
 use kernel\classes\ECCINI;
 use kernel\classes\ECCObject;
 use kernel\classes\ECCTemplate;
+use kernel\classes\mail\ECCMail;
 
 class ECCUser extends ECCObject {
 
@@ -62,6 +63,8 @@ class ECCUser extends ECCObject {
 	}
 
     static function login(){
+        if(isset($_SESSION['isLoginIn']) && $_SESSION['isLoginIn']) header("Location: /");
+
         $template = ECCTemplate::instance();
 
         if(isset($_POST['ECCUserLogin']) && $_POST['ECCUserLogin'] === 'form'){
@@ -90,7 +93,7 @@ class ECCUser extends ECCObject {
             }
         }
 
-        $params = ['current_user'	=> (array)$_SESSION['currentUser']];
+        $params = [];
         if(isset($_POST['ECCUserLogin_email']))
             $params['ECCUserLogin_email'] = $_POST['ECCUserLogin_email'];
 
@@ -146,6 +149,7 @@ class ECCUser extends ECCObject {
                 $userRegister->store();
 
                 $userRegister->logRegister();
+                //TODO: Envoi d'un mail après l'inscription
 //                $userRegister->sendEmail();
 
                 header("Location: /");
@@ -161,6 +165,8 @@ class ECCUser extends ECCObject {
     }
 
     static function passwordReset(){
+        if(isset($_SESSION['isLoginIn']) && $_SESSION['isLoginIn'])  header("Location: /");
+
         $template = ECCTemplate::instance();
 
         if(isset($_POST['ECCUserPasswordReset']) && $_POST['ECCUserPasswordReset'] === 'form') {
@@ -172,11 +178,27 @@ class ECCUser extends ECCObject {
                 $errors[] = "Adresse e-mail invalide";
 
             $userExist = ECCUser::fetchByEmail($_POST['ECCUserPasswordReset_email']);
-            if($userExist instanceof ECCUser){
-                $errors[] = "Un compte utilise déjà ce mail";
-            }
+            if(!$userExist instanceof ECCUser)
+                $errors[] = "Aucun compte référencé.";
+
+            if(count($errors) > 0)
+                goto error;
+            $subject = "Demande de changement de mot de passe";
+            $data = [
+//                changement du mot passe possible dans les 30 min suivant la demande
+                "dateMax" => time() + 30*60,
+                "site" => $_SERVER["HTTP_HOST"],
+                "account" => $_POST['ECCUserPasswordReset_email']
+            ];
+
+//            $mail = new ECCMail($_POST['ECCUserPasswordReset_email'], $subject);
+//            $mail->setData($data);
+//            if($mail->generateEmail()){
+//                $mail->send();
+//            }
         }
 
+        error:
         $params = [];
 
         if(isset($errors))
