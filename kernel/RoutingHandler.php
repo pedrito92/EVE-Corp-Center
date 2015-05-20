@@ -44,18 +44,37 @@ class RoutingHandler {
 		}
 
 		if($this->module == 'kernel\classes\user\ECCUser'){
-			$method	= $this->parsedURI['1'];
-			$class	= $this->module;
+			if(isset($this->parsedURI['1'])){
+				$method	= $this->parsedURI['1'];
+				$class	= $this->module;
 
-			if(method_exists($class, $method))
-				$class::$method();
-			else
-				ECCSystem::error(404);
+				if(method_exists($class, $method)){
+					$class::$method();
+					exit();
+				}
+			}
+
+			ECCSystem::error(404);
 			exit;
 		}
 
 		if($this->module == 'kernel\classes\admin\ECCAdmin'){
-			ECCAdmin::routing($this->parsedURI);
+			if(!isset($this->parsedURI['1']))
+				$method = 'dashboard';
+			else
+				$method	= $this->parsedURI['1'];
+			$class	= $this->module;
+
+			if(method_exists($class, $method)){
+				$ECCAdmin = new $class;
+				if(isset($this->parsedURI['2']))
+					$ECCAdmin->$method((int)$this->parsedURI['2']);
+				else
+					$ECCAdmin->$method();
+				exit();
+			}
+			ECCSystem::error(404);
+			exit;
 		}
 
 		$ECCObjectId = ECCAlias::getECCObjectId($this->requestURI);
