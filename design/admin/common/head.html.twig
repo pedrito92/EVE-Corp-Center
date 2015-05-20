@@ -1,0 +1,9 @@
+<title>{% if not data.seo_title is empty %}{{ data.seo_title }}{% else %}{{ object.name }}{% endif %}</title>
+
+{% if not data.seo_description is empty %}
+	<meta name="description" content="{{ data.seo_description }}">
+{% endif %}
+
+{% if not data.seo_keyword is empty %}
+	<meta name="keywords" content="{{ data.seo_keyword }}">
+{% endif %}
