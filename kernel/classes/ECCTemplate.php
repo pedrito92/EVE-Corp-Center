@@ -5,13 +5,17 @@ use Twig_Loader_Filesystem;
 use Twig_Environment;
 use Twig_Extension_Optimizer;
 use Twig_Extension_Debug;
+use Twig_SimpleFilter;
 
 class ECCTemplate {
 
-	protected static $instance;
+	/** @var Twig_Loader_Filesystem $theme */
+	public $theme;
 	protected $twig;
 	protected $twigParams = [];
-	public $theme;
+
+	protected static $instance;
+
 
 	protected function __construct($themeDir = null){
 		$ini	= ECCINI::instance();
@@ -29,10 +33,23 @@ class ECCTemplate {
 			$this->twig->addExtension(new \Twig_Extension_Debug());
 
 		$this->twig->addExtension(new Twig_Extension_Optimizer());
+
+		$this->ECCOperators();
 	}
 
 	function setParams($key, $value){
 		$this->twigParams[$key] = $value;
+	}
+
+	/**
+	 * Appel les operateurs custom d'ECC.
+	 * TODO : Probablement à transformer en extension Twig
+	 */
+	function ECCOperators(){
+		$designPath = new Twig_SimpleFilter('designPath', function($string){
+			return '/'.$this->theme->getPaths()[0].'/'.$string;
+		});
+		$this->twig->addFilter($designPath);
 	}
 
 	function display($template = 'page.html.twig', $params = array()){
