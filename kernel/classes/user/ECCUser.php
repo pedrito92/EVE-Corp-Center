@@ -282,12 +282,12 @@ class ECCUser extends ECCObject {
 
     function logRegister(){
         $debug = ECCDebug::instance();
-        $debug->write('infos.log','', '[ECCUser] New user registered : '.$this->getAttribute("name").' ('.$this->ID.')');
+        $debug->write('infos.log','', '[ECCUser] New user registered: '.$this->getAttribute("name").' ('.$this->ID.')');
     }
 
     function logPasswordReset(){
         $debug = ECCDebug::instance();
-        $debug->write('accounts.log','', '[ECCUser] User password reset: '.$this->getAttribute("name"));
+        $debug->write('infos.log','', '[ECCUser] User password reset: '.$this->getAttribute("name"));
     }
 
     function sendEmail(){
