@@ -147,8 +147,6 @@ class ECCUser extends ECCObject {
                 $userRegister->setData('password', $userRegister->generatePassword($_POST['ECCUserLogin_email'],$_POST['ECCUserLogin_passwd']));
 
                 $userRegister->store();
-
-                $userRegister->logRegister();
                 //TODO: Envoi d'un mail après l'inscription
 //                $userRegister->sendEmail();
 
@@ -278,16 +276,6 @@ class ECCUser extends ECCObject {
         $db->bind(":pwd", $data["password"]);
         $db->execute();
 
-    }
-
-    function logRegister(){
-        $debug = ECCDebug::instance();
-        $debug->write('infos.log','', '[ECCUser] New user registered: '.$this->getAttribute("name").' ('.$this->ID.')');
-    }
-
-    function logPasswordReset(){
-        $debug = ECCDebug::instance();
-        $debug->write('infos.log','', '[ECCUser] User password reset: '.$this->getAttribute("name"));
     }
 
     function sendEmail(){
