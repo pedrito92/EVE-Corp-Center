@@ -164,48 +164,112 @@ class ECCUser extends ECCObject {
         $template->display('user/register.html.twig', $params);
     }
 
-    static function passwordReset(){
+    static function passwordReset($token = null){
         if(isset($_SESSION['isLoginIn']) && $_SESSION['isLoginIn'])  header("Location: /");
 
         $template = ECCTemplate::instance();
-
-        if(isset($_POST['ECCUserPasswordReset']) && $_POST['ECCUserPasswordReset'] === 'form') {
-            $errors = array();
-            if (!isset($_POST['ECCUserPasswordReset_email']) || $_POST['ECCUserPasswordReset_email'] == '')
-                $errors[] = "Adresse e-mail obligatoire";
-
-            if (!filter_var($_POST['ECCUserPasswordReset_email'], FILTER_VALIDATE_EMAIL))
-                $errors[] = "Adresse e-mail invalide";
-
-            $userExist = ECCUser::fetchByEmail($_POST['ECCUserPasswordReset_email']);
-            if(!$userExist instanceof ECCUser)
-                $errors[] = "Aucun compte référencé.";
-
-            if(count($errors) > 0)
-                goto error;
-            $subject = "Demande de changement de mot de passe";
-            $data = [
-//                changement du mot passe possible dans les 30 min suivant la demande
-                "dateMax" => time() + 30*60,
-                "site" => $_SERVER["HTTP_HOST"],
-                "account" => $_POST['ECCUserPasswordReset_email']
-            ];
-
-//            $mail = new ECCMail($_POST['ECCUserPasswordReset_email'], $subject);
-//            $mail->setData($data);
-//            if($mail->generateEmail()){
-//                $mail->send();
-//            }
-        }
-
-        error:
         $params = [];
+
+        if($token == null) {
+            if (isset($_POST['ECCUserPasswordReset']) && $_POST['ECCUserPasswordReset'] === 'form') {
+                $errors = array();
+                if (!isset($_POST['ECCUserPasswordReset_email']) || $_POST['ECCUserPasswordReset_email'] == '')
+                    $errors[] = "Adresse e-mail obligatoire";
+
+                if (!filter_var($_POST['ECCUserPasswordReset_email'], FILTER_VALIDATE_EMAIL))
+                    $errors[] = "Adresse e-mail invalide";
+
+                $userExist = ECCUser::fetchByEmail($_POST['ECCUserPasswordReset_email']);
+                var_dump($userExist);
+                if (!$userExist instanceof ECCUser)
+                    $errors[] = "Aucun compte référencé.";
+
+                if (count($errors) > 0)
+                    goto error;
+
+                $token = new ECCUserToken();
+                $token->generate($userExist->ID, $_POST['ECCUserPasswordReset_email']);
+
+//                $subject = "Demande de changement de mot de passe";
+//
+//                $ini = ECCINI::instance();
+//
+//                $data = [
+////                changement du mot passe possible dans les 30 min suivant la demande
+//                    "site" => $ini->getVariable('storage', 'url'),
+//                    "token" => $token->getToken()
+//                ];
+//
+//                $mail = new ECCMail($_POST['ECCUserPasswordReset_email'], $subject);
+//                $mail->setData($data);
+//                if ($mail->generateEmail()) {
+//                    $mail->send();
+//                }
+            }
+        }else{
+            $errors = array();
+            $params['token'] = $token;
+
+            $tokenVerif = new ECCUserToken();
+            $token = $tokenVerif->verify($token);
+
+            if(!$token)
+                $errors[] = "Votre token n'est pas valide.";
+
+            if (isset($_POST['ECCUserPasswordReset']) && $_POST['ECCUserPasswordReset'] === 'formReset') {
+
+                if (!isset($_POST['ECCUserPasswordReset_passwd']) || $_POST['ECCUserPasswordReset_passwd'] == '')
+                    $errors[] = "Mot de passe obligatoire";
+
+                if($_POST['ECCUserPasswordReset_passwd'] != $_POST['ECCUserPasswordReset_repasswd'])
+                    $errors[] = "Les mots de passe doivent être identiques";
+
+                if (count($errors) > 0)
+                    goto error;
+
+                $user = new ECCUser($token['ID_object']);
+
+                //TODO test le bon fonctionnement
+                $password = $user->generatePassword($user->getData('email'), $_POST['ECCUserPasswordReset_passwd']);
+                $succes = $user->updatePassword($user->data["ID"],$password);
+
+                if($succes){
+                    $tokenDelete = $tokenVerif->delete($user->ID);
+                    $user->logPasswordReset();
+
+                    if($tokenDelete)
+                        header("Location: /user/login");
+                    else
+                        header("Location: /");
+                }else
+                    $errors[] = "Votre mot de passe n'a pas été changé, veuillez contacté le support ECC";
+
+//                $tokenVerif->delete($token['ID_object']);
+//                header("Location: /");
+
+//                $subject = "Demande de changement de mot de passe";
+//
+//                $ini = ECCINI::instance();
+//
+//                $data = [
+////                changement du mot passe possible dans les 30 min suivant la demande
+//                    "site" => $ini->getVariable('storage', 'url'),
+//                    "token" => $token->getToken()
+//                ];
+//
+//                $mail = new ECCMail($_POST['ECCUserPasswordReset_email'], $subject);
+//                $mail->setData($data);
+//                if ($mail->generateEmail()) {
+//                    $mail->send();
+//                }
+            }
+        }
+        error:
 
         if(isset($errors))
             $params['errors'] = $errors;
 
         $template->display('user/passwordReset.html.twig', $params);
-
     }
 
     static function password(){
