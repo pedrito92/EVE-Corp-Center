@@ -47,7 +47,10 @@ class RoutingHandler {
 				$class	= $this->module;
 
 				if(method_exists($class, $method)){
-					$class::$method();
+                    if(isset($this->parsedURI['2']) && $method == "passwordReset")
+					    $class::$method($this->parsedURI['2']);
+                    else
+                        $class::$method();
 					exit();
 				}
 			}
