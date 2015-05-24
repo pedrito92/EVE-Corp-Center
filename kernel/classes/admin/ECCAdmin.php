@@ -1,6 +1,8 @@
 <?php
 
 namespace kernel\classes\admin;
+use kernel\classes\cms\ECCPage;
+use kernel\classes\ECCObject;
 use kernel\classes\ECCTemplate;
 
 class ECCAdmin {
@@ -15,6 +17,10 @@ class ECCAdmin {
 
 	function edit($object_ID){
 		echo "Édition de l'object ".$object_ID.".";
+
+		$ECCObject = new ECCPage($object_ID);
+
+		var_dump($ECCObject);
 	}
 
 	function delete($object_ID){
@@ -27,5 +33,20 @@ class ECCAdmin {
 
 	function dashboard(){
 		ECCTemplate::instance('admin')->display('pages/home.html.twig',[]);
+	}
+
+	function CMS(){
+		ECCTemplate::instance('admin')->display('pages/cms.html.twig',[]);
+	}
+
+	function users(){
+
+	}
+
+	function forums(){
+
+	}
+	function killboard(){
+
 	}
 }

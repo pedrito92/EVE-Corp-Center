@@ -22,4 +22,19 @@ class ECCAlias {
 		else
 			return (int)$row['ID_object'];
 	}
+
+	static function getAliasbyECCObjectID($ECCObjectID){
+		$db			= ECCDB::instance();
+		$dbprefix	= $db->getPrefix();
+
+		$db->query('SELECT `url` FROM `'.$dbprefix.'alias` WHERE `ID_object` = :ECCObjectID');
+		$db->bind(':ECCObjectID',$ECCObjectID);
+
+		$row = $db->single();
+
+		if(!$row)
+			return false;
+		else
+			return $row['url'];
+	}
 } 

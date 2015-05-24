@@ -6,19 +6,19 @@ class ECCObject {
 
 	public $data = null;
 	public $attributes = [
-		'name' => null,
-		'language' => null,
+		'name' 		=> null,
+		'language' 	=> null,
 		'published' => null,
-		'modified' => null,
-		'creator' => null,
-		'status' => null];
+		'modified' 	=> null,
+		'creator' 	=> null,
+		'status' 	=> null,
+		'url'		=> null
+	];
 	public $ID = null;
 
 	function __construct($params = null){
 		if(is_numeric($params))
 			$this::fetch($params);
-
-		$this->getAllData($this->ID);
 	}
 
 	function getAttribute($attribute){
@@ -112,9 +112,8 @@ class ECCObject {
 					$this->setAttribute($key, $attribute);
 			}
 
-			/*
-			 * SELECT DATA OBJECT
-			 */
+			$this->attributes['url'] = ECCAlias::getAliasbyECCObjectID($this->ID);
+			$this->getAllData($this->ID);
 
 			return $this;
 		}
