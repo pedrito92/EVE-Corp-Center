@@ -93,9 +93,9 @@ class ECCSetup_setupCore extends ECCSetup {
             $dbh->exec("CREATE TABLE `".$_SESSION['mysql']['dbname']."`.`".$_SESSION['mysql']['prefix']."tokens` (
                           `ID_object` int(11) DEFAULT NULL,
                           `token` varchar(50) DEFAULT NULL,
-                        PRIMARY KEY (`ID_object`)
-                        ENGINE=InnoDB
-                        DEFAULT CHARSET=utf8
+                        PRIMARY KEY (`ID_object`))
+                        ENGINE = InnoDB
+                        DEFAULT CHARACTER SET = utf8
 						COLLATE = utf8_general_ci;");
 			
 			$dbh->exec("CREATE TABLE `".$_SESSION['mysql']['dbname']."`.`".$_SESSION['mysql']['prefix']."roles` (
