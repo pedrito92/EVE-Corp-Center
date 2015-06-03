@@ -66,7 +66,7 @@ class ECCObject {
             $db->bind(':parentObjectID',$this->attributes['parentObjectID']);
         } else {
 			$db->query("UPDATE `".$dbprefix."objects` SET `name` = :name, `modified` = now(), `status` = :status WHERE `ID` = :id;");
-			$db->bind(':id', $this->id);
+			$db->bind(':id', $this->ID);
 		}
 		$db->bind(':name',		$this->attributes['name']);
 		$db->bind(':status',	$this->attributes['status']);
