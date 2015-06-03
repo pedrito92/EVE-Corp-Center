@@ -43,7 +43,7 @@ class ECCObject {
 	}
 
 	function setData($data, $value){
-		if(array_key_exists($data, $this->$data)){
+		if(array_key_exists($data, $this->data)){
 			$this->data[$data] = $value;
 			return true;
 		}
