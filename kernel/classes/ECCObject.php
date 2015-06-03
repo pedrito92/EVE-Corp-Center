@@ -6,13 +6,14 @@ class ECCObject {
 
 	public $data = null;
 	public $attributes = [
-		'name' 		=> null,
-		'language' 	=> null,
-		'published' => null,
-		'modified' 	=> null,
-		'creator' 	=> null,
-		'status' 	=> null,
-		'url'		=> null
+		'name' 		        => null,
+		'language' 	        => null,
+		'published'         => null,
+		'modified' 	        => null,
+		'creator' 	        => null,
+		'status' 	        => null,
+        'parentObjectID'    => null,
+		'url'		        => null
 	];
 	public $ID = null;
 
@@ -43,7 +44,7 @@ class ECCObject {
 
 	function setData($data, $value){
 		if(array_key_exists($data, $this->$data)){
-			$this->$data[$data] = $value;
+			$this->data[$data] = $value;
 			return true;
 		}
 		return false;
@@ -85,7 +86,7 @@ class ECCObject {
 
 	}
 
-	function fetch($ECCObjectId, $showHidden = false){
+	function fetch($ECCObjectID, $showHidden = false){
 		$db 		= ECCDB::instance();
 		$dbprefix 	= $db->getPrefix();
 
@@ -94,7 +95,7 @@ class ECCObject {
 			$sql .= ' AND status = :status';
 
 		$db->query($sql);
-		$db->bind(':id', $ECCObjectId);
+		$db->bind(':id', $ECCObjectID);
 		if(!$showHidden)
 			$db->bind(':status', 1);
 
@@ -118,4 +119,29 @@ class ECCObject {
 			return $this;
 		}
 	}
+
+    static function fetchObjectsList($parentECCObjectID, $showHidden = false){
+        $parentECCObject = new self($parentECCObjectID);
+        if($parentECCObject instanceof self){
+
+            $db         = ECCDB::instance();
+            $dbprefix 	= $db->getPrefix();
+
+            $sql = 'SELECT * FROM `'.$dbprefix.'objects` WHERE `ID_parent_object` = :id';
+            if(!$showHidden)
+                $sql .= ' AND status = :status';
+
+            $db->query($sql);
+            $db->bind(':id', $parentECCObjectID);
+            if(!$showHidden)
+                $db->bind(':status', 1);
+
+            $array = $db->execute();
+
+            var_dump($array);
+
+        } else {
+            return false;
+        }
+    }
 }
