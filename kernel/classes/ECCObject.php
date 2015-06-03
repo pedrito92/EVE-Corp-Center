@@ -56,7 +56,7 @@ class ECCObject {
 
 		$db->beginTransaction();
 
-		if($this->id === null) {
+		if($this->ID === null) {
 			$db->query("INSERT INTO `".$dbprefix."objects` (`name`, `language`, `published`, `creator`, `status`, `ID_parent_object` )
 					VALUES (:name, :language, now(), :creator, :status, :parentObjectID);");
 
@@ -72,10 +72,10 @@ class ECCObject {
 		$db->bind(':status',	$this->attributes['status']);
 
 		$db->execute();
-		if($this->id === null)
-			$this->id = $db->lastInsertId();
+		if($this->ID === null)
+			$this->ID = $db->lastInsertId();
 
-		$this->storeData($this->id, $this->data);
+		$this->storeData($this->ID, $this->data);
 
 		$db->endTransaction();
 	}
