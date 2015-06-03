@@ -57,17 +57,18 @@ class ECCObject {
 		$db->beginTransaction();
 
 		if($this->id === null) {
-			$db->query("INSERT INTO `".$dbprefix."objects` (`name`, `language`, `published`, `creator`, `status` )
-					VALUES (:name, :language, now(), :creator, :status);");
+			$db->query("INSERT INTO `".$dbprefix."objects` (`name`, `language`, `published`, `creator`, `status`, `ID_parent_object` )
+					VALUES (:name, :language, now(), :creator, :status, :parentObjectID);");
 
-			$db->bind(':language',	$this->attributes['language']);
-			$db->bind(':creator',	$this->attributes['creator']);
-		} else {
+            var_dump($this->attributes);
+			$db->bind(':language',	    $this->attributes['language']);
+			$db->bind(':creator',	    $this->attributes['creator']);
+            $db->bind(':parentObjectID',$this->attributes['parentObjectID']);
+        } else {
 			$db->query("UPDATE `".$dbprefix."objects` SET `name` = :name, `modified` = now(), `status` = :status WHERE `ID` = :id;");
 			$db->bind(':id', $this->id);
 		}
 		$db->bind(':name',		$this->attributes['name']);
-		$db->bind(':status',	$this->attributes['status']);
 		$db->bind(':status',	$this->attributes['status']);
 
 		$db->execute();

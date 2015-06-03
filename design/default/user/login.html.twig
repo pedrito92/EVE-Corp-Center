@@ -15,7 +15,10 @@
 
 	<form action="/user/login" method="post">
 		<input type="hidden" name="ECCUserLogin" value="form">
-		<label for="ECCUserLogin_email">Your e-mail adress :</label>
+        {% if ECCUserPage is defined %}
+            <input name="ECCUserPage" type="hidden" value="{{ ECCUserPage }}"/>
+        {% endif %}
+        <label for="ECCUserLogin_email">Your e-mail adress :</label>
 		<input type="text" id="ECCUserLogin_email" name="ECCUserLogin_email" value="{% if ECCUserLogin_email is defined %}{{ ECCUserLogin_email }}{% endif %}" placeholder="you@domain.tld">
 
 		<label for="ECCUserLogin_passwd">Your password :</label>
