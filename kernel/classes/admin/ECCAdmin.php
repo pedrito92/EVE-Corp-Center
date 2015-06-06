@@ -27,7 +27,7 @@ class ECCAdmin {
 		echo "Suppression de l'object ".$object_ID.".";
 	}
 
-	function move($object_id){
+	function move($object_ID){
 		echo "Déplacement de l'object ".$object_ID.".";
 	}
 
