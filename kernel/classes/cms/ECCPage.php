@@ -42,7 +42,7 @@ class ECCPage extends ECCObject {
 		$db 		= ECCDB::instance();
 		$dbprefix 	= $db->getPrefix();
 
-		$db->query("SELECT `ID`, `content`, `seo_title`, `seo_keywords`, `seo_description`, `ID_parent` FROM `".$dbprefix."pages` WHERE `ID_object` = :id;");
+		$db->query("SELECT `ID`, `content`, `seo_title`, `seo_keywords`, `seo_description` FROM `".$dbprefix."pages` WHERE `ID_object` = :id;");
 		$db->bind(':id',$this->ID);
 		$row = $db->single();
 
