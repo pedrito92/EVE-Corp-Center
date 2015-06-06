@@ -148,7 +148,8 @@ class ECCUser extends ECCObject {
                 $userRegister->setAttribute('language', 'en-US');
                 $userRegister->setAttribute('status', 1);
                 $userRegister->setAttribute('creator', $_POST['ECCUserRegister_name']);
-                $userRegister->setAttribute('parentObjectID', 3);
+                $userRegister->setAttribute('ID_module', 4);
+                $userRegister->setAttribute('ID_parent_object', 3);
 
                 $userRegister->setData('email', $_POST['ECCUserRegister_email']);
                 $userRegister->setData('password', $userRegister->generatePassword($_POST['ECCUserRegister_email'],$_POST['ECCUserRegister_passwd']));
@@ -327,6 +328,7 @@ class ECCUser extends ECCObject {
     static function connection(){
         $template = ECCTemplate::instance();
 
+        //TODO Sortir le checking connection de la vue.
         $params = [];
 
         if(isset($errors))

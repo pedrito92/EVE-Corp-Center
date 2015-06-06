@@ -12,6 +12,7 @@ class ECCObject {
 		'modified' 	        => null,
 		'creator' 	        => null,
 		'status' 	        => null,
+        'ID_module'         => null,
         'ID_parent_object'  => null,
 		'url'		        => null
 	];
@@ -58,12 +59,12 @@ class ECCObject {
 
 		if($this->ID === null) {
 			$db->query("INSERT INTO `".$dbprefix."objects` (`name`, `language`, `published`, `creator`, `status`, `ID_parent_object` )
-					VALUES (:name, :language, now(), :creator, :status, :ID_parent_object);");
+					VALUES (:name, :language, now(), :creator, :status, :parentObjectID);");
 
             var_dump($this->attributes);
 			$db->bind(':language',	    $this->attributes['language']);
 			$db->bind(':creator',	    $this->attributes['creator']);
-            $db->bind(':ID_parent_object',$this->attributes['ID_parent_object']);
+            $db->bind(':parentObjectID',$this->attributes['parentObjectID']);
         } else {
 			$db->query("UPDATE `".$dbprefix."objects` SET `name` = :name, `modified` = now(), `status` = :status WHERE `ID` = :id;");
 			$db->bind(':id', $this->ID);
