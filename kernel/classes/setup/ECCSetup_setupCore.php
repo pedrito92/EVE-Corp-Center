@@ -23,6 +23,7 @@ class ECCSetup_setupCore extends ECCSetup {
 							`creator` VARCHAR(255) NULL DEFAULT NULL,
 							`status` VARCHAR(45) NULL DEFAULT '1',
 							`ID_module` INT(11) NULL DEFAULT NULL,
+							`ID_parent_object` INT(11) NULL DEFAULT 1,
 							PRIMARY KEY (`ID`))
 						ENGINE = InnoDB
 						DEFAULT CHARACTER SET = utf8
@@ -53,7 +54,6 @@ class ECCSetup_setupCore extends ECCSetup {
 							`seo_title` VARCHAR(90) NULL DEFAULT NULL,
 							`seo_keywords` VARCHAR(255) NULL DEFAULT NULL,
 							`seo_description` TINYTEXT NULL DEFAULT NULL,
-							`ID_parent` INT(11) NULL DEFAULT NULL,
 							PRIMARY KEY (`ID`))
 						ENGINE = InnoDB
 						DEFAULT CHARACTER SET = utf8
@@ -110,14 +110,15 @@ class ECCSetup_setupCore extends ECCSetup {
 						COLLATE = utf8_general_ci;");
 
 			$dbh->exec("INSERT INTO `".$_SESSION['mysql']['dbname']."`.`".$_SESSION['mysql']['prefix']."objects` (
-							`ID`, `name`, `language`, `published`, `creator`, `status`
+							`ID`, `name`, `language`, `published`, `creator`, `status`, `ID_parent_object`
 						) VALUES (
 							1,
 							'EVE Corp Center',
 							'en-US',
 							NOW(),
 							'EVE Corp Center Installer',
-							1
+							1,
+							0
 						);");
 
 			$dbh->exec("INSERT INTO `".$_SESSION['mysql']['dbname']."`.`".$_SESSION['mysql']['prefix']."modules` (
@@ -156,7 +157,7 @@ class ECCSetup_setupCore extends ECCSetup {
 						);");
 
 			$dbh->exec("INSERT INTO `".$_SESSION['mysql']['dbname']."`.`".$_SESSION['mysql']['prefix']."objects` (
-							`ID`, `name`, `language`, `published`, `creator`, `status`, `ID_module`
+							`ID`, `name`, `language`, `published`, `creator`, `status`, `ID_module`, `ID_parent_object`
 						) VALUES (
 							2,
 							'Home',
@@ -164,14 +165,14 @@ class ECCSetup_setupCore extends ECCSetup {
 							NOW(),
 							'EVE Corp Center Installer',
 							1,
+							1,
 							1
 						);");
 			$dbh->exec("INSERT INTO `".$_SESSION['mysql']['dbname']."`.`".$_SESSION['mysql']['prefix']."pages` (
-							`ID`, `ID_object`, `ID_parent`
+							`ID`, `ID_object`
 						) VALUES (
 							1,
-							2,
-							1
+							2
 						);");
 
 			$dbh->exec("INSERT INTO `".$_SESSION['mysql']['dbname']."`.`".$_SESSION['mysql']['prefix']."alias` (
@@ -182,13 +183,14 @@ class ECCSetup_setupCore extends ECCSetup {
 						);");
 
 			$dbh->exec("INSERT INTO `".$_SESSION['mysql']['dbname']."`.`".$_SESSION['mysql']['prefix']."objects` (
-							`ID`, `name`, `language`, `published`, `creator`, `status`
+							`ID`, `name`, `language`, `published`, `creator`, `status`, `ID_parent_object`
 						) VALUES (
 							3,
 							'Users',
 							'en-US',
 							NOW(),
 							'EVE Corp Center Installer',
+							1,
 							1
 						);");
 
