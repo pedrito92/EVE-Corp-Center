@@ -186,7 +186,7 @@ class ECCUser extends ECCObject {
                     $errors[] = "Adresse e-mail invalide";
 
                 $userExist = ECCUser::fetchByEmail($_POST['ECCUserPasswordReset_email']);
-                var_dump($userExist);
+
                 if (!$userExist instanceof ECCUser)
                     $errors[] = "Aucun compte référencé.";
 
