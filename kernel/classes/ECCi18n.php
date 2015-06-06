@@ -32,7 +32,7 @@ class ECCi18n {
 		// TODO : sélectionner en fonction de la langue de l'installation
 		$this->i18n->setFallbackLang('en');
 		$this->i18n->setSectionSeperator('_');
-		$this->i18n->setFilePath('./'.$dirName.'/{LANGUAGE}.ini.php');
+		$this->i18n->setFilePath('./'.$dirName.'/{LANGUAGE}.ini');
 	}
 
 	public function init(){
