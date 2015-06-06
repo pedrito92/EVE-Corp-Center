@@ -56,25 +56,26 @@ class ECCObject {
 
 		$db->beginTransaction();
 
-		if($this->id === null) {
-			$db->query("INSERT INTO `".$dbprefix."objects` (`name`, `language`, `published`, `creator`, `status` )
-					VALUES (:name, :language, now(), :creator, :status);");
+		if($this->ID === null) {
+			$db->query("INSERT INTO `".$dbprefix."objects` (`name`, `language`, `published`, `creator`, `status`, `ID_parent_object` )
+					VALUES (:name, :language, now(), :creator, :status, :parentObjectID);");
 
-			$db->bind(':language',	$this->attributes['language']);
-			$db->bind(':creator',	$this->attributes['creator']);
-		} else {
+            var_dump($this->attributes);
+			$db->bind(':language',	    $this->attributes['language']);
+			$db->bind(':creator',	    $this->attributes['creator']);
+            $db->bind(':parentObjectID',$this->attributes['parentObjectID']);
+        } else {
 			$db->query("UPDATE `".$dbprefix."objects` SET `name` = :name, `modified` = now(), `status` = :status WHERE `ID` = :id;");
-			$db->bind(':id', $this->id);
+			$db->bind(':id', $this->ID);
 		}
 		$db->bind(':name',		$this->attributes['name']);
 		$db->bind(':status',	$this->attributes['status']);
-		$db->bind(':status',	$this->attributes['status']);
 
 		$db->execute();
-		if($this->id === null)
-			$this->id = $db->lastInsertId();
+		if($this->ID === null)
+			$this->ID = $db->lastInsertId();
 
-		$this->storeData($this->id, $this->data);
+		$this->storeData($this->ID, $this->data);
 
 		$db->endTransaction();
 	}

@@ -86,7 +86,10 @@ class ECCUser extends ECCObject {
                 if($test){
                     $_SESSION['isLoginIn'] = true;
                     $_SESSION['currentUser'] = $user;
-                    header("Location: /");
+                    if(isset($_POST["ECCUserPage"]))
+                        header("Location: ".$_POST["ECCUserPage"]);
+                    else
+                        header("Location: /");
                 } else {
                     $errors[] = "Aucun utilisateur n'a été trouvé avec cette adresse e-mail et ce mot de passe.";
                 }
@@ -96,6 +99,9 @@ class ECCUser extends ECCObject {
         $params = [];
         if(isset($_POST['ECCUserLogin_email']))
             $params['ECCUserLogin_email'] = $_POST['ECCUserLogin_email'];
+
+        if(isset($_POST["ECCUserPage"]))
+            $params["ECCUserPage"] = $_POST["ECCUserPage"];
 
         if(isset($errors))
             $params['errors'] = $errors;
@@ -142,9 +148,10 @@ class ECCUser extends ECCObject {
                 $userRegister->setAttribute('language', 'en-US');
                 $userRegister->setAttribute('status', 1);
                 $userRegister->setAttribute('creator', $_POST['ECCUserRegister_name']);
+                $userRegister->setAttribute('parentObjectID', 3);
 
                 $userRegister->setData('email', $_POST['ECCUserRegister_email']);
-                $userRegister->setData('password', $userRegister->generatePassword($_POST['ECCUserLogin_email'],$_POST['ECCUserLogin_passwd']));
+                $userRegister->setData('password', $userRegister->generatePassword($_POST['ECCUserRegister_email'],$_POST['ECCUserRegister_passwd']));
 
                 $userRegister->store();
                 //TODO: Envoi d'un mail après l'inscription
@@ -317,6 +324,17 @@ class ECCUser extends ECCObject {
 
     }
 
+    static function connection(){
+        $template = ECCTemplate::instance();
+
+        $params = [];
+
+        if(isset($errors))
+            $params['errors'] = $errors;
+
+        $template->display('user/connection.html.twig', $params);
+    }
+
     function updatePassword($id, $password){
         $db = ECCDB::instance();
         $dbprefix 	= $db->getPrefix();
@@ -330,6 +348,7 @@ class ECCUser extends ECCObject {
     }
 
     function storeData($id, $data){
+        $url		= '/users/';
 		$db 		= ECCDB::instance();
 		$dbprefix 	= $db->getPrefix();
 
@@ -338,6 +357,12 @@ class ECCUser extends ECCObject {
         $db->bind(":idObject", $id);
         $db->bind(":email", $data["email"]);
         $db->bind(":pwd", $data["password"]);
+        $db->execute();
+
+        $db->query("INSERT INTO `".$dbprefix."alias` (`ID_object`, `url`)
+                    VALUES (:idObject, :url);");
+        $db->bind(":idObject", $id);
+        $db->bind(':url', $url.$this->getAttribute('name'));
         $db->execute();
 
     }
