@@ -1,17 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: florianneveu
- * Date: 16/01/15
- * Time: 16:53
- */
 
 namespace kernel\classes;
 
 
 class ECCDebug {
 
-	protected static $instance;
+	/* TODO: transformer la class en observer */
+
+	/*protected static $instance;
 
 	protected function __construct(){
 
@@ -36,7 +32,6 @@ class ECCDebug {
 			@fclose($logFile);
 
 		} else {
-			//todo self->printOnScreen();
 		}
 
 	}
@@ -47,5 +42,5 @@ class ECCDebug {
 		}
 
 		return self::$instance;
-	}
+	}*/
 }
