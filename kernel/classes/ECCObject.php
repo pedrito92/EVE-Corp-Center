@@ -2,9 +2,21 @@
 
 namespace kernel\classes;
 
+use kernel\classes\CMS\ECCPage;
+
 class ECCObject {
 
-	public $data = null;
+	protected $id;
+	protected $ECCModule;
+
+	public function exec(){
+		var_dump($this->ECCModule->getData());
+	}
+
+	public function __construct($id = NULL){
+		$this->ECCModule = new ECCPage;
+	}
+	/*public $data = null;
 	public $attributes = [
 		'name' 		        => null,
 		'language' 	        => null,
@@ -145,5 +157,5 @@ class ECCObject {
         } else {
             return false;
         }
-    }
+    }*/
 }

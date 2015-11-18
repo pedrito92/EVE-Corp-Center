@@ -18,15 +18,16 @@ use kernel\classes\ECCINI;
 
 if(ECCINI::exist()){
 	if(!ECCSystem::getDebug()){
-		ini_set( "display_errors", 0);
+		ini_set( "display_errors", 1);
 	}
 } else {
-	ini_set( "display_errors", 0);
+	ini_set( "display_errors", 1);
 }
 
 session_start();
 
-kernel\RoutingHandler::init();
-
+//kernel\RoutingHandler::init();
+$routing = new \kernel\RoutingHandler();
+/*
 $uri = kernel\RoutingHandler::instance();
-$uri->routing();
+$uri->routing();*/
