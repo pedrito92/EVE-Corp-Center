@@ -16,9 +16,6 @@ class ECCSystem {
 		$this->params = array(
 			'_SERVER' => $_SERVER
 		);
-
-		$ini = ECCINI::instance('core.ini','settings');
-		$this->debug = $ini->getVariable('infos','debug');
 	}
 
 	/**
@@ -27,14 +24,6 @@ class ECCSystem {
 	 */
 	public static function getClientIP(){
 		return self::instance()->params['_SERVER']['REMOTE_ADDR'];
-	}
-
-	/**
-	 * Returns the debug state
-	 * @return bool
-	 */
-	public static function getDebug(){
-		return self::instance()->debug;
 	}
 
 	/**
