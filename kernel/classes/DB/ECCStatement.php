@@ -9,14 +9,23 @@
 namespace kernel\classes\DB;
 
 use kernel\classes\interfaces\iECCResults;
+use PDOStatement;
 
-class ECCStatements implements iECCResults
+class ECCStatement implements iECCResults
 {
     protected $st;
 
-    public function __construct(ECCStatements $st)
+    public function __construct(PDOStatement $st)
     {
         $this->st = $st;
+    }
+
+    public function execute(){
+        return $this->st->execute();
+    }
+
+    public function bindValue($param, $value, $type){
+        return $this->st->bindValue($param, $value, $type);
     }
 
     public function fetch()

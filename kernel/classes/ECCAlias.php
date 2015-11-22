@@ -2,9 +2,12 @@
 
 namespace kernel\classes;
 
+use kernel\classes\DB\ECCPdo;
+
 class ECCAlias {
 
 	/**
+     * @param $dao ECCPdo
 	 * @param $requestURI
 	 * @return mixed
 	 */
@@ -12,7 +15,7 @@ class ECCAlias {
 		$db 		= new ECCDB($dao);  /*ECCDB::instance();*/
 		$dbprefix	= $dao->getPrefix();
 
-		$dao->query('SELECT `ID_object` FROM `'.$dbprefix.'alias` WHERE BINARY `url` = :url');
+		$db->query('SELECT `ID_object` FROM `'.$dbprefix.'alias` WHERE BINARY `url` = :url');
 		$db->bind(':url', $requestURI);
 
 		$row = $db->single();

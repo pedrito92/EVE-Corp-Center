@@ -16,4 +16,12 @@ interface iECCDb {
     public function prepare($query);
 
     public function getPrefix();
+
+    public function bind($param, $value, $type);
+
+    public function exec($statement);
+
+    public function execute();
+
+    public function fetch($fetch);
 }
