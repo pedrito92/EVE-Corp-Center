@@ -15,7 +15,7 @@ interface iECCResults {
 
     public function fetchAll();
 
-    public function bindValue($param, $value, $type);
+    public function bind($param, $value, $type);
 
     public function execute();
 }

@@ -24,7 +24,7 @@ class ECCStatement implements iECCResults
         return $this->st->execute();
     }
 
-    public function bindValue($param, $value, $type){
+    public function bind($param, $value, $type){
         return $this->st->bindValue($param, $value, $type);
     }
 

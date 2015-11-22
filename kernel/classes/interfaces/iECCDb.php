@@ -19,9 +19,19 @@ interface iECCDb {
 
     public function bind($param, $value, $type);
 
-    public function exec($statement);
-
     public function execute();
 
     public function fetch($fetch);
+
+    public function fetchAll($fetch);
+
+    public function rowCount();
+
+    public function lastInsertId($seqname = null);
+
+    public function beginTransaction();
+
+    public function commit();
+
+    public function rollBack();
 }

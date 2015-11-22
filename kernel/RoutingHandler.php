@@ -62,30 +62,6 @@ class RoutingHandler {
 		$object->exec();
 	}
 
-    private function initDb(){
-        $ini = ECCINI::instance();
-
-        $infos = $ini->getSection('database');
-
-        $host 	= $infos['host'];
-        $port		= $infos['port'];
-        $dbname	= $infos['dbname'];
-        $username	= $infos['username'];
-        $passwd	= $infos['passwd'];
-        $prefix	= $infos['prefix'];
-
-        try{
-            $this->dao = new ECCPdo($dsn, $username, $passwd, $options);
-        }
-        catch(PDOException $e){
-            $this->error = $e->getMessage();
-
-            header("HTTP/1.1 500 Internal Server Error");
-            print("<b>Fatal error</b>: The web server did not finish its request<br/>");
-            print("La connexion à la base de données à échouée. Si le problème persiste, contactez votre administrateur.");
-            exit;
-        }
-    }
 
 	private function setECCModule(){
 		if(isset($this->parsedURI[0]) && $this->parsedURI[0] != ''){
