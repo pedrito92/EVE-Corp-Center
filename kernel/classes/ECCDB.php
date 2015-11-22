@@ -2,6 +2,9 @@
 
 namespace kernel\classes;
 
+use Exception;
+use kernel\classes\interfaces\iECCDb;
+use kernel\classes\interfaces\iECCResults;
 use \PDO;
 use \PDOException;
 
@@ -21,7 +24,28 @@ class ECCDB {
 	private $error;
 	private $stmt;
 
-	protected function __construct(){
+    protected $dao;
+
+    // On souhaite un objet instanciant une classe qui implémente iDB.
+    public function __construct(iECCDb $dao)
+    {
+        $this->dao = $dao;
+    }
+
+    public function get($id)
+    {
+        $q = $this->dao->query('SELECT id, auteur, titre, contenu FROM news WHERE id = '.(int)$id);
+
+        // On vérifie que le résultat implémente bien iResult.
+        if (!$q instanceof iECCResults)
+        {
+            throw new Exception('Le résultat d\'une requête doit être un objet implémentant iResult');
+        }
+
+        return $q->fetchAssoc();
+    }
+
+/*	protected function __construct(){
 		$ini = ECCINI::instance();
 
 		$infos = $ini->getSection('database');
@@ -51,7 +75,7 @@ class ECCDB {
 			print("La connexion à la base de données à échouée. Si le problème persiste, contactez votre administrateur.");
 			exit;
 		}
-	}
+	}*/
 
 	public static function instance(){
 		if(!self::$instance instanceof self){

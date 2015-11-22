@@ -8,11 +8,11 @@ class ECCAlias {
 	 * @param $requestURI
 	 * @return mixed
 	 */
-	static function getECCObjectId($requestURI){
-		$db 		= ECCDB::instance();
-		$dbprefix	= $db->getPrefix();
+	static function getECCObjectId($dao, $requestURI){
+		$db 		= new ECCDB($dao);  /*ECCDB::instance();*/
+		$dbprefix	= $dao->getPrefix();
 
-		$db->query('SELECT `ID_object` FROM `'.$dbprefix.'alias` WHERE BINARY `url` = :url');
+		$dao->query('SELECT `ID_object` FROM `'.$dbprefix.'alias` WHERE BINARY `url` = :url');
 		$db->bind(':url', $requestURI);
 
 		$row = $db->single();
