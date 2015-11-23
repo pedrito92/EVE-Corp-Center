@@ -7,27 +7,24 @@ if (version_compare(PHP_VERSION, '5.4') < 0){
     exit;
 }
 
-
 if(!ini_get("date.timezone")) {
     date_default_timezone_set("UTC");
 }
 
 require_once('autoload.php');
-use kernel\classes\ECCSystem;
+use kernel\classes\ECCDebug;
 use kernel\classes\ECCINI;
 
+$ECCDebug = new ECCDebug();
+
 if(ECCINI::exist()){
-	if(!ECCSystem::getDebug()){
-		ini_set( "display_errors", 1);
+	if(!$ECCDebug->getDebug()){
+		ini_set( "display_errors", 0);
 	}
 } else {
-	ini_set( "display_errors", 1);
+	ini_set( "display_errors", 0);
 }
 
 session_start();
 
-//kernel\RoutingHandler::init();
 $routing = new \kernel\RoutingHandler();
-/*
-$uri = kernel\RoutingHandler::instance();
-$uri->routing();*/

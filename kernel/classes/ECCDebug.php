@@ -2,18 +2,22 @@
 
 namespace kernel\classes;
 
-
 class ECCDebug {
 
 	/* TODO: transformer la class en observer */
 
-	/*protected static $instance;
+	private $debug;
 
-	protected function __construct(){
-
+	public function __construct(){
+		$ini = ECCINI::instance('core.ini','settings');
+		$this->debug = $ini->getVariable('infos','debug');
 	}
 
-	function write($logFileName, $logDirName = '', $string){
+	public function getDebug(){
+		return $this->debug;
+	}
+
+	/*function write($logFileName, $logDirName = '', $string){
 		$logDirName = 'var/log/'.$logDirName.'/';
 
 		if(!file_exists($logDirName))
