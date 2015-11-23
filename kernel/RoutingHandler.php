@@ -29,14 +29,20 @@ class RoutingHandler {
             $username	= $infos['username'];
             $passwd	    = $infos['passwd'];
             $prefix	    = $infos['prefix'];
+            $driver     = $infos['driver'];
 
-            $options = array(
-                ECCPdo::ATTR_PERSISTENT    		=> true,
-                ECCPdo::ATTR_ERRMODE       		=> ECCPdo::ERRMODE_EXCEPTION,
-                ECCPdo::MYSQL_ATTR_INIT_COMMAND	=> "SET NAMES utf8"
-            );
-            $dsn = 'mysql:host='.$host.';port='.$port.';dbname='.$dbname;
-            $dao = new ECCPdo($dsn, $username, $passwd, $options, $prefix );
+            switch($driver){
+                case 'pdo':
+                default:
+                    $options = array(
+                        ECCPdo::ATTR_PERSISTENT    		=> true,
+                        ECCPdo::ATTR_ERRMODE       		=> ECCPdo::ERRMODE_EXCEPTION,
+                        ECCPdo::MYSQL_ATTR_INIT_COMMAND	=> "SET NAMES utf8"
+                    );
+                    $dsn = 'mysql:host='.$host.';port='.$port.';dbname='.$dbname;
+                    $dao = new ECCPdo($dsn, $username, $passwd, $options, $prefix );
+                    break;
+            }
 
         }
         catch(PDOException $e){
