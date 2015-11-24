@@ -12,6 +12,7 @@ if(!ini_get("date.timezone")) {
 }
 
 require_once('autoload.php');
+use kernel\classes\DB\ECCPdo;
 use kernel\classes\ECCDebug;
 use kernel\classes\ECCINI;
 
@@ -25,6 +26,43 @@ if(ECCINI::exist()){
 	ini_set( "display_errors", 0);
 }
 
+try{
+    if(!ECCINI::exist()) throw new PDOException('ECCIni required');
+
+    $ini = ECCINI::instance();
+    $infos = $ini->getSection('database');
+
+    $host 	    = $infos['host'];
+    $port	    = $infos['port'];
+    $dbname	    = $infos['dbname'];
+    $username	= $infos['username'];
+    $passwd	    = $infos['passwd'];
+    $prefix	    = $infos['prefix'];
+    $driver     = $infos['driver'];
+
+    switch($driver){
+        case 'pdo':
+        default:
+            $options = array(
+                ECCPdo::ATTR_PERSISTENT    		=> true,
+                ECCPdo::ATTR_ERRMODE       		=> ECCPdo::ERRMODE_EXCEPTION,
+                ECCPdo::MYSQL_ATTR_INIT_COMMAND	=> "SET NAMES utf8"
+            );
+            $dsn = 'mysql:host='.$host.';port='.$port.';dbname='.$dbname;
+            $dao = new ECCPdo($dsn, $username, $passwd, $options, $prefix );
+            break;
+    }
+
+}
+catch(PDOException $e){
+    $this->error = $e->getMessage();
+
+    header("HTTP/1.1 500 Internal Server Error");
+    print("<b>Fatal error</b>: The web server did not finish its request<br/>");
+    print("La connexion à la base de données à échouée. Si le problème persiste, contactez votre administrateur.");
+    exit;
+}
+
 session_start();
 
-$routing = new \kernel\RoutingHandler();
+$routing = new \kernel\RoutingHandler($dao);
