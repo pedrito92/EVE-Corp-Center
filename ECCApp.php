@@ -55,7 +55,7 @@ try{
 
 }
 catch(PDOException $e){
-    $this->error = $e->getMessage();
+	/*$this->error = $e->getMessage();*/
 
     header("HTTP/1.1 500 Internal Server Error");
     print("<b>Fatal error</b>: The web server did not finish its request<br/>");
@@ -65,4 +65,5 @@ catch(PDOException $e){
 
 session_start();
 
-$routing = new \kernel\RoutingHandler($dao);
+$routing = new \kernel\RoutingHandler();
+$routing->routing($dao);
