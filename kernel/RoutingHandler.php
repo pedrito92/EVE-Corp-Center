@@ -53,6 +53,10 @@ class RoutingHandler {
 			}
 		} elseif($this->ECCModule == 'kernel\classes\setup\ECCSetup') {
 
+		} elseif($this->ECCModule == 'kernel\classes\user\ECCUser') {
+			$method		= $this->parsedURI[1];
+			$ECCUser	= new $this->ECCModule($dao);
+			$ECCUser->$method();
 		} else {
 			$ECCObjectID = ECCAlias::getECCObjectId($dao, $this->requestURI);
 
@@ -68,12 +72,16 @@ class RoutingHandler {
 	private function getECCModule($offset = 0){
 		if(isset($this->parsedURI[$offset]) && $this->parsedURI[$offset] != ''){
 			switch($this->parsedURI[$offset]){
+				case "admin":
+					$ECCModule = "kernel\classes\admin\ECCAdmin";
+					break;
+
 				case "setup":
 					$ECCModule = "kernel\classes\setup\ECCSetup";
 					break;
 
-				case "admin":
-					$ECCModule = "kernel\classes\admin\ECCAdmin";
+				case "user":
+					$ECCModule = "kernel\classes\user\ECCUser";
 					break;
 
 				default:

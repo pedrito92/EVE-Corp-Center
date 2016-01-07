@@ -85,14 +85,14 @@ class ECCTemplate {
 	 * get theme used by ECC, and create the loader for Twig
 	 */
 	public function getTheme($path){
-		if(file_exists('design/'.$path))
-			$this->theme = new Twig_Loader_Filesystem('design/'.$path);
+		if(file_exists('themes/'.$path))
+			$this->theme = new Twig_Loader_Filesystem('themes/'.$path);
 		else
 			$this->loadDefaultTheme();
 	}
 
 	private function loadDefaultTheme(){
-		$this->theme	= new Twig_Loader_Filesystem('design/default');
+		$this->theme	= new Twig_Loader_Filesystem('themes/default16');
 		$this->twig		= new Twig_Environment($this->theme, $this->twigParams);
 		$ECCDebug		= new ECCDebug();
 
