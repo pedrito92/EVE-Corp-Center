@@ -1,0 +1,17 @@
+{% extends "layout.html.twig" %}
+
+
+{% block title %}Conncetion Required{% endblock %}
+
+
+{% block content %}
+
+    {% if current_user|length > 0 %}
+        <h1>Mon profil</h1>
+        {{ dump(current_user) }}
+    {% else %}
+        {% include 'user/connection.html.twig' %}
+    {% endif %}
+
+
+{% endblock %}

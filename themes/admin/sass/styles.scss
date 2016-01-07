@@ -1,0 +1,44 @@
+@charset "UTF-8";
+@import "compass";
+@import "lib/fonts";
+@import "lib/media-queries";
+@import "lib/pxtorem";
+@import "lib/variables";
+
+//noinspection CssUnknownTarget
+@import "sections/**";
+
+html {
+	font-size: 14px;
+}
+
+body {
+	background: url('../images/background.jpg') no-repeat center top;
+	background-size: cover;
+	color: #323131;
+	font-family: $encode;
+	font-size: 100%;
+	min-height: 100vh;
+	position: relative;
+}
+
+.form-signin {
+	background-color: #1f1c21;
+	-moz-box-shadow: 0px 0px 7px 1px $gris;
+	-webkit-box-shadow: 0px 0px 7px 1px $gris;
+	-o-box-shadow: 0px 0px 7px 1px $gris;
+	box-shadow: 0px 0px 7px 1px $gris;
+	color: #fefefe;
+	margin-left: -200px;
+	margin-top: -200px;
+	padding: 60px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 400px;
+
+	h1 {
+		margin-top: 0;
+		text-transform: uppercase;
+	}
+}

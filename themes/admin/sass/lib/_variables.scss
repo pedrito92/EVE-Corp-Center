@@ -1,0 +1,14 @@
+$blanc  : #f6f6f6;
+$blanc2 : #706868;
+$gris   : #1f1c21;
+$orange : #ed4524;
+$orange2: #f96e43;
+
+.bg-danger {
+	background-color: $orange2;
+	border-left: 4px solid $orange;
+	padding: 6px;
+}
+.text-danger {
+	color: $orange;
+}

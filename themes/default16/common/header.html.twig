@@ -1,0 +1,16 @@
+<header>
+	<h1>EVE Corp Center</h1>
+	<nav>
+		<ul>
+			<li><a href="/">Home</a></li>
+			{% if current_user is empty %}
+				<li><a href="/user/login">Login</a></li>
+				<li><a href="/user/register">Register</a></li>
+			{% else %}
+				<li><a href="{{ current_user.attributes.url }}">Mon Compte</a></li>
+				<li><a href="/user/logout">Logout</a></li>
+				<li><a href="/user/password">Change Password</a></li>
+			{% endif %}
+		</ul>
+	</nav>
+</header>

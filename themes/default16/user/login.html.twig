@@ -1,0 +1,29 @@
+{% extends "layout.html.twig" %}
+
+
+{% block title %}Login{% endblock %}
+
+
+{% block content %}
+	{% if errors is defined %}
+		<ul>
+			{% for error in errors %}
+				<li>{{ error }}</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+
+	<form action="/user/login" method="post">
+		<input type="hidden" name="ECCUserLogin" value="form">
+        {% if ECCUserPage is defined %}
+            <input name="ECCUserPage" type="hidden" value="{{ ECCUserPage }}"/>
+        {% endif %}
+        <label for="ECCUserLogin_email">Your e-mail adress :</label>
+		<input type="text" id="ECCUserLogin_email" name="ECCUserLogin_email" value="{% if ECCUserLogin_email is defined %}{{ ECCUserLogin_email }}{% endif %}" placeholder="you@domain.tld">
+
+		<label for="ECCUserLogin_passwd">Your password :</label>
+		<input type="password" id="ECCUserLogin_passwd" name="ECCUserLogin_passwd" value="" placeholder="********">
+        <span><a href="/user/passwordReset">Reset my password</a></span>
+		<input type="submit" value="ok">
+	</form>
+{% endblock %}

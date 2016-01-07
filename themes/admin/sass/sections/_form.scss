@@ -1,0 +1,25 @@
+input {
+	&[type="text"], &[type="email"], &[type="password"]{
+		-webkit-appearance: none;
+		background: none;
+		border: none;
+		border-bottom: 2px solid $blanc2;
+		border-radius: 0;
+		color: $blanc2;
+		margin-top: 10px;
+		padding: 7px;
+		position: relative;
+		&:hover, &:focus {
+			border-bottom-color: $blanc;
+			color: $blanc;
+			box-shadow: none;
+			&:-webkit-autofill {
+				-webkit-text-fill-color: $blanc !important;
+			}
+		}
+		&:-webkit-autofill {
+			-webkit-box-shadow: 0 0 0px 1000px $gris inset;
+			-webkit-text-fill-color: $blanc2 !important;
+		}
+	}
+}

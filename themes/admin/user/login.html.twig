@@ -1,0 +1,42 @@
+{% extends "user/layout.html.twig" %}
+
+
+{% block title %}Login | {{ parent() }}{% endblock %}
+
+
+{% block content %}
+	<div class="container">
+		<form class="form-signin" action="/user/login" method="post">
+			<h1 class="form-signin-heading">Sign in</h1>
+
+			{% if errors is defined %}
+				<ul>
+                    {% for error in errors %}
+                        <li class="bg-danger">{{ error }}</li>
+                    {% endfor %}
+                </ul>
+			{% endif %}
+
+			<label for="inputEmail" class="sr-only">E-mail address</label>
+			<input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="E-mail address" required autofocus>
+			<label for="inputPassword" class="sr-only">Password</label>
+			<input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" value="remember-me"> Remember me
+				</label>
+			</div>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+		</form>
+	</div>
+
+	{#<form action="/user/login" method="post">
+		<input type="hidden" name="ECCUserLogin" value="form">
+		<label for="ECCUserLogin_email">Your e-mail adress :</label>
+		<input type="text" id="ECCUserLogin_email" name="ECCUserLogin_email" value="{% if ECCUserLogin_email is defined %}{{ ECCUserLogin_email }}{% endif %}" placeholder="you@domain.tld">
+
+		<label for="ECCUserLogin_passwd">Your password :</label>
+		<input type="password" id="ECCUserLogin_passwd" name="ECCUserLogin_passwd" value="" placeholder="********">
+		<input type="submit" value="ok">
+	</form>#}
+{% endblock %}

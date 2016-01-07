@@ -1,0 +1,36 @@
+@font-face {
+	font-family: 'montserratlight';
+	src: url('../fonts/montserrat-light-webfont.eot');
+	src: url('../fonts/montserrat-light-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/montserrat-light-webfont.woff2') format('woff2'), url('../fonts/montserrat-light-webfont.woff') format('woff'), url('../fonts/montserrat-light-webfont.ttf') format('truetype'), url('../fonts/montserrat-light-webfont.svg#montserratlight') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'montserratregular';
+	src: url('../fonts/montserrat-regular-webfont.eot');
+	src: url('../fonts/montserrat-regular-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/montserrat-regular-webfont.woff2') format('woff2'), url('../fonts/montserrat-regular-webfont.woff') format('woff'), url('../fonts/montserrat-regular-webfont.ttf') format('truetype'), url('../fonts/montserrat-regular-webfont.svg#montserratregular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'encode_sansregular';
+	src: url('../fonts/encodesans-regular-webfont.eot');
+	src: url('../fonts/encodesans-regular-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/encodesans-regular-webfont.woff2') format('woff2'), url('../fonts/encodesans-regular-webfont.woff') format('woff'), url('../fonts/encodesans-regular-webfont.ttf') format('truetype'), url('../fonts/encodesans-regular-webfont.svg#encode_sansregular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'encode_sansbold';
+	src: url('../fonts/encodesans-bold-webfont.eot');
+	src: url('../fonts/encodesans-bold-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/encodesans-bold-webfont.woff2') format('woff2'), url('../fonts/encodesans-bold-webfont.woff') format('woff'), url('../fonts/encodesans-bold-webfont.ttf') format('truetype'), url('../fonts/encodesans-bold-webfont.svg#encode_sansbold') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+$montserrat     : "montserratregular";
+$montserratL    : "montserratlight";
+$encode         : "encode_sansregular";
+$encodeB        : "encode_sansbold";
