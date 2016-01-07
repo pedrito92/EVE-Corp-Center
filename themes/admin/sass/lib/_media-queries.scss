@@ -1,0 +1,39 @@
+$tablet-width: 768px;
+$desktop-width: 992px;
+$large-desktop-width: 1200px;
+
+@mixin sm-devices {
+  @media (min-width: #{$tablet-width}) {
+    @content;
+  }
+}
+
+@mixin md-devices {
+  @media (min-width: #{$desktop-width}) {
+    @content;
+  }
+}
+
+@mixin lg-devices {
+    @media (min-width: #{$large-desktop-width}) {
+        @content;
+    }
+}
+
+@mixin xs-devices{
+    @media (max-width: #{$tablet-width - 1px}) {
+        @content;
+    }
+}
+
+@mixin retina {
+  @media
+    only screen and (-webkit-min-device-pixel-ratio: 2),
+    only screen and (min--moz-device-pixel-ratio: 2),
+    only screen and (-o-min-device-pixel-ratio: 2/1),
+    only screen and (min-device-pixel-ratio: 2),
+    only screen and (min-resolution: 192dpi),
+    only screen and (min-resolution: 2dppx) {
+    @content;
+  }
+}

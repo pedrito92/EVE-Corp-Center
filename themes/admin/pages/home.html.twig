@@ -1,0 +1,15 @@
+{% extends "layout.html.twig" %}
+
+{% block head %}
+	{{ parent() }}
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<section>
+			<h1>Dashboard</h1>
+
+			{{ dump(disk) }}
+		</section>
+	</div>
+{% endblock %}

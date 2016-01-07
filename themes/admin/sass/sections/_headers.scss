@@ -1,0 +1,65 @@
+.header {
+
+	p {
+		color: #bfbab9;
+		line-height: calculateEm(24px, 14px);
+		a {
+			color: $orange;
+		}
+	}
+
+	&.header-home {
+		background: url('../images/header-home-xs.jpg') no-repeat right top;
+		background-size: cover;
+		height: 388px;
+
+		h1 {
+			background: url('../images/logo.png') no-repeat center top;
+			background-size: 225px auto;
+			font-size: 0;
+			height: 95px;
+			text-indent: -9999px;
+			width: 225px;
+		}
+
+		.btn {
+			margin-top: 20px;
+		}
+
+		@include sm-devices {
+			background-image: url('../images/header-home.jpg');
+			height: 100vh;
+			max-height: 626px;
+
+			h1 {
+				background-size: 350px 150px;
+				height: 150px;
+				margin-top: 140px;
+				width: 350px;
+			}
+			p {
+				@include font-size(16px);
+			}
+			.btn {
+				margin-top: 70px;
+				padding-left: 25px;
+				padding-right: 25px;
+			}
+		}
+	}
+	&.header-support {
+		background: url('../images/header-support.jpg') no-repeat right top;
+		background-size: cover;
+	}
+	&:not(.header-home){
+		padding: 80px 0 60px;
+
+		h1 {
+			@include font-size(30px);
+			color: $blanc;
+			font-family: $montserrat;
+			margin-bottom: 20px;
+			text-transform: uppercase;
+		}
+	}
+}

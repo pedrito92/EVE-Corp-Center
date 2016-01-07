@@ -1,0 +1,38 @@
+{% extends "layout.html.twig" %}
+
+{% block head %}
+	{{ parent() }}
+
+	<style type="text/css">
+		.clearfix > div {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 15px;
+			width: 33%;
+			float: left;
+			overflow: hidden;
+		}
+
+		footer {
+			clear: both;
+			text-align: center;
+		}
+	</style>
+{% endblock %}
+
+{% block content %}
+	<ul>
+		<li>{{ data.ID_parent }}</li>
+		<li>{{ object.name }}</li>
+	</ul>
+	<section id="content">
+		{{ data.content|raw }}
+		<div class="clearfix">
+			<div>Current user : {{ dump(current_user) }}</div>
+
+			<div>Data : {{ dump(data) }}</div>
+			<div>Object_ID : {{ dump(object_id) }}</div>
+			<div>Object : {{ dump(object) }}</div>
+		</div>
+	</section>
+{% endblock %}

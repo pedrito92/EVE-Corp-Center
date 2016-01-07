@@ -1,0 +1,26 @@
+{% extends "layout.html.twig" %}
+
+{% block head %}
+	{{ parent() }}
+{% endblock %}
+
+{% block content %}
+	<section>
+		<div>
+			Object :
+			{{ dump(object) }}
+		</div>
+		<div>
+			Object ID :
+			{{ dump(object_id) }}
+		</div>
+		<div>
+			Data :
+			{{ dump(data) }}
+		</div>
+		<div>
+			Current user :
+			{{ dump(current_user) }}
+		</div>
+	</section>
+{% endblock %}
