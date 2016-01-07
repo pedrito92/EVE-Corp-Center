@@ -18,18 +18,19 @@ class ECCTemplate {
 
 
 	protected function __construct($themeDir = null){
-		$ini	= ECCINI::instance();
-		$cache	= $ini->getVariable('infos','cache');
+		$ini		= ECCINI::instance();
+		$cache		= $ini->getVariable('infos','cache');
+		$ECCDebug	= new ECCDebug();
 
 		if($cache)
 			$this->setParams('cache','var/cache/twig');
-		if(ECCSystem::getDebug())
+		if($ECCDebug->getDebug())
 			$this->setParams('debug', true);
 
 		$this->setTheme($themeDir);
 		$this->twig	= new Twig_Environment($this->theme, $this->twigParams);
 
-		if(ECCSystem::getDebug())
+		if($ECCDebug->getDebug())
 			$this->twig->addExtension(new \Twig_Extension_Debug());
 
 		$this->twig->addExtension(new Twig_Extension_Optimizer());
@@ -57,8 +58,8 @@ class ECCTemplate {
 		try{
 			echo $this->twig->render($template, $params);
 		}catch (\Exception $e){
-			$debug = ECCDebug::instance();
-			$debug->write('error.log', '', '[ECCTemplate] '.$e->getMessage());
+			/*$debug = ECCDebug::instance();
+			$debug->write('error.log', '', '[ECCTemplate] '.$e->getMessage());*/
 			$this->loadDefaultTheme();
 			echo $this->twig->render($template, $params);
 		}
@@ -84,17 +85,18 @@ class ECCTemplate {
 	 * get theme used by ECC, and create the loader for Twig
 	 */
 	public function getTheme($path){
-		if(ECCDir::isExist('design/'.$path))
+		if(file_exists('design/'.$path))
 			$this->theme = new Twig_Loader_Filesystem('design/'.$path);
 		else
 			$this->loadDefaultTheme();
 	}
 
 	private function loadDefaultTheme(){
-		$this->theme = new Twig_Loader_Filesystem('design/default');
-		$this->twig	= new Twig_Environment($this->theme, $this->twigParams);
+		$this->theme	= new Twig_Loader_Filesystem('design/default');
+		$this->twig		= new Twig_Environment($this->theme, $this->twigParams);
+		$ECCDebug		= new ECCDebug();
 
-		if(ECCSystem::getDebug())
+		if($ECCDebug->getDebug())
 			$this->twig->addExtension(new \Twig_Extension_Debug());
 
 		$this->twig->addExtension(new Twig_Extension_Optimizer());
