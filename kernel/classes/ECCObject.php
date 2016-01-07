@@ -2,19 +2,18 @@
 
 namespace kernel\classes;
 
-use kernel\classes\CMS\ECCPage;
-
 class ECCObject {
 
-	protected $id;
-	protected $ECCModule;
+	public $ECCObjectID;
+	public $ECCModule;
 
 	public function exec(){
 		var_dump($this->ECCModule->getData());
 	}
 
-	public function __construct($id = NULL){
-		$this->ECCModule = new ECCPage;
+	public function __construct($dao, $ECCModule, $ECCObjectID = NULL){
+		$this->ECCModule = new $ECCModule;
+		$this->ECCObjectID = $ECCObjectID;
 	}
 	/*public $data = null;
 	public $attributes = [

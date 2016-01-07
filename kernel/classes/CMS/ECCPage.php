@@ -5,8 +5,7 @@ use kernel\classes\ECCModule;
 
 class ECCPage implements ECCModule {
 
-	private $data = [
-			'id'		=> 2,
+	public $data = [
 			'title'		=> 'Mon super titre',
 			'slug'		=> 'mon-super-titre',
 			'content'	=> 'lorem ipsum dolor sit amet consectetur gna gna grzjigjre i zejf izjiejz oezjfjzeiof'
