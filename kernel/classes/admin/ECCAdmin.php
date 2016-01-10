@@ -8,7 +8,7 @@ class ECCAdmin {
 	private $data = [];
 	private $ECCObject = null;
 
-	function __construct($dao, ECCObject $ECCObject = null) {
+	function __construct($dao = null, ECCObject $ECCObject = null) {
 		$this->ECCObject = $ECCObject;
 	}
 
