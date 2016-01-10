@@ -2,10 +2,13 @@
 
 namespace kernel;
 
-use kernel\classes\admin\ECCAdmin;
 use kernel\classes\ECCAlias;
-use kernel\classes\ECCSystem;
 use kernel\classes\ECCObject;
+use kernel\classes\ECCSystem;
+
+use kernel\classes\admin\ECCAdmin;
+use kernel\classes\admin\ECCAdminSettings;
+
 
 class RoutingHandler {
 
@@ -25,12 +28,18 @@ class RoutingHandler {
 			if(!isset($this->parsedURI[1])) {
 				$object = new ECCAdmin($dao);
 				$object->dashboard();
-			} elseif($this->parsedURI[1] == 'administration') {
-				/*
-				 * Administration section
-				 *
-				 * Dedicated to settings, configuration, management...
-				 */
+			} elseif($this->parsedURI[1] == 'settings') {
+				if(!isset($this->parsedURI[2])){
+					$method = 'index';
+				} else {
+					$method = $this->parsedURI[2];
+				}
+				$ECCAdmin = new ECCAdminSettings();
+				if(method_exists($ECCAdmin, $method)) {
+					$ECCAdmin->$method();
+				} else {
+					header('Location: /admin/settings/');
+				}
 			} elseif($this->parsedURI[1] == 'edit') {
 				/*
 				 * ECCObject edition

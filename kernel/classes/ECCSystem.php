@@ -18,6 +18,27 @@ class ECCSystem {
 		);
 	}
 
+	public static function deleteDir($dirPath){
+		$glob = glob($dirPath);
+		foreach ($glob as $g) {
+			if (!is_dir($g)) {
+				unlink($g);
+			} else {
+				self::deleteDir("$g/*");
+				rmdir($g);
+			}
+		}
+		return true;
+	}
+
+	public static function redirectToObject($ECCObject){
+
+	}
+
+	public static function redirectToURI($uri){
+		header('Location: '.$uri);
+	}
+
 	/**
 	 * Returns the client IP
 	 * @return string
