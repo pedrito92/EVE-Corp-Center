@@ -25,12 +25,10 @@ class RoutingHandler {
 			if(!isset($this->parsedURI[1])) {
 				$object = new ECCAdmin($dao);
 				$object->dashboard();
-			} elseif($this->parsedURI[1] == 'administration') {
-				/*
-				 * Administration section
-				 *
-				 * Dedicated to settings, configuration, management...
-				 */
+			} elseif($this->parsedURI[1] == 'settings') {
+				$method = $this->parsedURI[2];
+				$ECCAdmin = new $this->ECCModule($dao);
+				$ECCAdmin->$method();
 			} elseif($this->parsedURI[1] == 'edit') {
 				/*
 				 * ECCObject edition
