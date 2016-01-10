@@ -1,6 +1,6 @@
 <?php
 
-require_once('vendor/autoload.php');
+require_once('lib/autoload.php');
 
 function autoloader($class) {
     $path = str_replace('\\', DIRECTORY_SEPARATOR, $class);

@@ -1,5 +1,5 @@
 {
-  "name": "vendor_name/EVE Corp Center",
+  "name": "eve-corp-center/eve-corp-center",
   "description": "CMS for corporation of players in EVE Online.",
   "minimum-stability": "stable",
   "license": "proprietary",
@@ -23,6 +23,9 @@
       "role": "Front-end developer"
     }
   ],
+  "config": {
+    "vendor-dir": "lib"
+  },
   "require": {
     "3rdpartyeve/phealng": "2.1.0",
     "twig/twig": "~1.0",
