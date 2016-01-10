@@ -5,7 +5,6 @@
         "This file is @generated automatically"
     ],
     "hash": "900c429a7574c5c235866b47b81223f7",
-    "content-hash": "9a6d9903bf60a8e3e28637bc3371d46a",
     "packages": [
         {
             "name": "3rdpartyeve/phealng",

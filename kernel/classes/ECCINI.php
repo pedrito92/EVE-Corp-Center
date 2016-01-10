@@ -112,4 +112,29 @@ class ECCINI {
 		}
 		return false;
 	}
+
+    function setVariable($sectionName, $variableName, $value){
+        if(!$this->hasSection($sectionName)){
+            array_push($this->sections, strtoupper($sectionName));
+        }
+
+        //Set or update new value
+        $this->sectionsValues[strtoupper($sectionName)][$variableName] = $value;
+    }
+
+    function saveFile(){
+
+        //Save in the right file at the beginning of the file
+        $mainSettingsFile = fopen("$this->dirName/$this->fileName.php", 'w');
+
+        //Write each values
+        foreach ( $this->sectionsValues as $section => $values ) {
+            fwrite($mainSettingsFile, '[' . $section . "]\n");
+            foreach ( $values as $key => $value ) {
+                fwrite($mainSettingsFile, $key . ' = ' . $value . "\n");
+            }
+            fwrite($mainSettingsFile, "\n");
+        }
+        fclose($mainSettingsFile);
+    }
 } 

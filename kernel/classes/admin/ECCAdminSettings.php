@@ -18,6 +18,7 @@ class ECCAdminSettings extends ECCAdmin {
     public function index(){
         $ECCDebug = new ECCDebug();
         echo '<a href="/admin/settings/clearcache">Clear cache</a><br>';
+        echo '<a href="/admin/settings/testIni">testIni</a><br>';
 
         if($ECCDebug->getDebug())
             echo '<a href="/admin/settings/toggleDebug">Disable debug</a><br>';
@@ -44,5 +45,15 @@ class ECCAdminSettings extends ECCAdmin {
     public function clearcache() {
         ECCSystem::deleteDir('var/cache/twig');
         ECCSystem::redirectToURI('/admin/settings/');
+    }
+
+    public function testIni(){
+        $ini = ECCINI::instance('core-save.ini','settings');
+        $ini->setVariable('test', 'key', 'value');
+        $ini->setVariable('infos', 'debug', 0);
+        $ini->setVariable('database', 'driver', 'mysql');
+        $ini->saveFile();
+
+        echo 'saved';
     }
 }
