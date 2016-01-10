@@ -7,8 +7,6 @@ function autoloader($class) {
 
     if(file_exists($path.".php")){
         require_once($path.'.php');
-    } elseif(file_exists('lib/'.$path.'.php')){
-        require_once('lib/'.$path.'.php');
     }
 }
 
